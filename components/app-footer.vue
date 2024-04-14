@@ -1,0 +1,101 @@
+<template>
+    <footer class="bg-[#212529] py-14">
+        <div class="container">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-4 lg:gap-20">
+                <div class="col-span-2 md:col-span-1 flex flex-col gap-4">
+                    <h2 class="text-[#fff] font-semibold text-[1.2rem]">About Us</h2>
+                    <p class="font-light text-[0.9rem] pr-0 md:pr-6 lg:pr-0">
+                        Your trusted partner for hassle-free loans. With transparent processes and quick approvals, we empower your financial journey. Simplify borrowing with Easy Capital today.
+                    </p>
+                    <div class="flex mt-4 items-center gap-4">
+                        <nuxt-link target="_blank" to="https://facebook.com" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                            <icons-facebook class="max-w-[1.6rem]"/>
+                        </nuxt-link>
+                        <nuxt-link target="_blank" to="https://twitter.com" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                            <icons-twitter class="max-w-[1.6rem]"/>
+                        </nuxt-link>
+                        <nuxt-link target="_blank" to="https://instagram.com" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                            <icons-instagram class="max-w-[1.6rem]"/>
+                        </nuxt-link>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <h2 class="text-[#fff] font-semibold text-[1.2rem]">Our Products</h2>
+                    <ul class="font-light text-[0.9rem] flex flex-col gap-2">
+                        <li><nuxt-link to="/">Term Loan</nuxt-link></li>
+                        <li><nuxt-link to="/">Credit Line</nuxt-link></li>
+                        <li><nuxt-link to="/">Invoice Loan</nuxt-link></li>
+                        <li><nuxt-link to="/">Machinery Loan</nuxt-link></li>
+                        <li><nuxt-link to="/">Business Loan Secure</nuxt-link></li>
+                        <li><nuxt-link to="/">Unsecure Loan</nuxt-link></li>
+                        <li><nuxt-link to="/">Women Loan</nuxt-link></li>
+                        <li><nuxt-link to="/">Ecommerce Loan</nuxt-link></li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <h2 class="text-[#fff] font-semibold text-[1.2rem]">Quick Links</h2>
+                    <ul class="font-light text-[0.9rem] flex flex-col gap-2">
+                        <li><nuxt-link to="/">About Us</nuxt-link></li>
+                        <li><nuxt-link to="/">Contact Us</nuxt-link></li>
+                        <li><nuxt-link to="/">Our Partners</nuxt-link></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-1 flex flex-col gap-4">
+                    <h2 class="text-[#fff] font-semibold text-[1.2rem]">Have any questions?</h2>
+                    <div class="flex items-center gap-4">
+                        <icons-location class="max-w-[1.6rem]"/>
+                        <p class="font-light text-[0.9rem]">203 Fake St. Mountain View, San Francisco, California, USA</p>
+                    </div>
+
+                    <nuxt-link to="tel:+23923929210" target="_blank" class="flex items-center gap-4 cursor-pointer">
+                        <icons-phone class="max-w-[1.6rem]"/>
+                        <p class="font-light text-[0.9rem]">+2 392 3929 210</p>
+                    </nuxt-link>
+
+                    <nuxt-link to="mailto:easycapital@gmail.com" target="_blank" class="flex items-center gap-4 cursor-pointer">
+                        <icons-email class="shrink-0 max-w-[1.6rem]"/>
+                        <p class="font-light text-[0.9rem] break-words">easycapital@gmail.com</p>
+                    </nuxt-link>
+                    
+                </div>
+
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="font-light text-[1rem]">
+                    Copyright ©{{ year }} All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+</template>
+
+<script>
+export default{
+    data(){
+        return{
+            year: null
+        }
+    },
+    mounted(){
+        this.year = new Date().getFullYear();
+    }
+}
+</script>
+
+<style scoped>
+footer p{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+footer li{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+footer li:hover{
+    color: #fff;
+}
+</style>

@@ -1,0 +1,42 @@
+<template>
+    <div @click="" class="group relative cursor-pointer">
+        <div class="flex items-center gap-4 lg:gap-2">
+            <slot/>
+            <span class="text-[1.5rem] rotate-[-90deg] group-hover:rotate-[90deg] group-hover:text-primary duration-[200ms]">&#8249;</span>
+        </div>
+        <div class="bg-[#fff] font-medium z-[20] hidden group-hover:block lg:absolute whitespace-nowrap py-1 px-4 lg:border-2 border-[#dcdcdc] rounded-xl text-[0.9rem] text-slate-700">
+            <li class="my-3" v-for="item in items" :key="item.name">
+                <nuxt-link :to="item.route" @click="close">{{ item.name }}</nuxt-link>
+            </li>
+        </div>
+    </div>
+</template>
+
+<script>
+export default{
+    name: 'HoveringDropdown',
+    props: ['closeNav'],
+    props: {
+        items:{
+            type: Array,
+            default: []
+        }
+    },
+    methods:{
+        close(){
+            const event = new CustomEvent('close-nav');
+            document.dispatchEvent(event)
+        }
+    }
+}
+</script>
+
+<style scoped>
+li>a{
+    transition: border 0.3s;
+}
+
+li>a:hover{
+    color: #4285f4;
+}
+</style>

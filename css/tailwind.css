@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: "Poppins", sans-serif;
+}
+
+html{
+    font-size: 100%;
+}
+
+@media screen and (min-width: 1536px) and (max-width: 1919px) {
+    html{
+        font-size: 95%;
+    }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1535px) {
+    html{
+        font-size: 90%;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+    html{
+        font-size: 85%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    html{
+        font-size: 80%;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 767px) {
+    html{
+        font-size: 67%;
+    }
+}
