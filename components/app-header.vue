@@ -20,6 +20,11 @@
                     </li>
                 </hovering-dropdown>
                 <li>
+                    <nuxt-link class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/emi-calculator">
+                        EMI Calculator
+                    </nuxt-link>
+                </li>
+                <li>
                     <nuxt-link class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/">
                         About Us
                     </nuxt-link>
@@ -33,6 +38,9 @@
                     <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/contact-us">
                         Contact Us
                     </nuxt-link>
+                </li>
+                <li>
+                    <custom-button title="Call Us: +91-87459-45682" />
                 </li>
             </ul>
         </div>

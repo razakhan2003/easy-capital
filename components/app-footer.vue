@@ -47,17 +47,17 @@
                     <h2 class="text-[#fff] font-semibold text-[1.2rem]">Have any questions?</h2>
                     <div class="flex items-center gap-4">
                         <icons-location class="max-w-[1.6rem]"/>
-                        <p class="font-light text-[0.9rem]">203 Fake St. Mountain View, San Francisco, California, USA</p>
+                        <p class="font-light text-[0.9rem]">Maruti Industrial Development Area, Plot 23, Sector 18, Gurugram, Haryana 122015</p>
                     </div>
 
-                    <nuxt-link to="tel:+23923929210" target="_blank" class="flex items-center gap-4 cursor-pointer">
+                    <nuxt-link to="tel:+918745945682" target="_blank" class="flex items-center gap-4 cursor-pointer">
                         <icons-phone class="max-w-[1.6rem]"/>
-                        <p class="font-light text-[0.9rem]">+2 392 3929 210</p>
+                        <p class="font-light text-[0.9rem]">+91 87459 45682</p>
                     </nuxt-link>
 
-                    <nuxt-link to="mailto:easycapital@gmail.com" target="_blank" class="flex items-center gap-4 cursor-pointer">
+                    <nuxt-link to="mailto:support@easycapital.co.in" target="_blank" class="flex items-center gap-4 cursor-pointer">
                         <icons-email class="shrink-0 max-w-[1.6rem]"/>
-                        <p class="font-light text-[0.9rem] break-words">easycapital@gmail.com</p>
+                        <p class="font-light text-[0.9rem] break-words">support@easycapital.co.in</p>
                     </nuxt-link>
                     
                 </div>

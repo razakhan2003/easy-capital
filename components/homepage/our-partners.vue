@@ -6,20 +6,16 @@
                 <p class="font-light lg:w-2/3 text-[1rem] text-center">
                     We connect you with a wide network of reputable lenders offering a variety of loan products tailored to your needs. Whether you're looking for a personal loan, a mortgage, or a business loan, our platform simplifies the process by providing you with multiple options to compare and choose from.                </p>
             </div>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 mt-8">
-                <div class="flex items-center">
-                    <img class="w-full" src="/images/logos/lending-kart.png" alt="">
+            <div class="flex items-center justify-center gap-10 mt-8">
+                <div class="w-[15%] flex items-center">
+                    <img class="w-full" src="/images/logos/piramal-finance.png" alt="">
                 </div>
-                <div class="flex items-center">
-                    <img class="w-full" src="/images/logos/bajaj-finserv.png" alt="">
+                <div class="w-[15%] flex items-center">
+                    <img class="w-full" src="/images/logos/iifl-finance.png" alt="">
                 </div>
-                <div class="flex items-center">
-                    <img class="w-full" src="/images/logos/bajaj-finserv.png" alt="">
+                <div class="w-[15%] flex items-center">
+                    <img class="w-full" src="/images/logos/chola-finance.png" alt="">
                 </div>
-                <div class="flex items-center">
-                    <img class="w-full" src="/images/logos/bajaj-finserv.png" alt="">
-                </div>
-
             </div>
         </div>
     </div>

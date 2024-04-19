@@ -7,7 +7,7 @@
                 <p class="font-light text-[1.1rem] mt-8">
                     Your trusted partner for hassle-free loans. With transparent processes and quick approvals, we empower your financial journey. Simplify borrowing with Easy Capital today.
                 </p>
-                <custom-button class="max-w-fit mt-10" title="Get Started" />
+                <custom-button @click="popup.show = true" class="max-w-fit mt-10" title="Get Started" />
             </div>
             <div class="h-full lg:w-1/2 items-center">
                 <vue3-lottie class="w-full" animationLink="./animations/homepage-animation.json" />
@@ -19,6 +19,11 @@
 <script>
 import { Vue3Lottie } from 'vue3-lottie'
 export default{
-    components: {Vue3Lottie}
+    components: {Vue3Lottie},
+    computed: {
+        popup(){
+            return popupState().value;
+        }
+    },
 }
 </script>

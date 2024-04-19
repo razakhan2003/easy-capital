@@ -27,14 +27,14 @@
                             </div>
                         </div>
                         <div class="rounded-md bg-primary p-4 flex flex-col gap-4">
-                            <nuxt-link to="tel:+23923929210" target="_blank" class="flex items-center gap-4 cursor-pointer">
+                            <nuxt-link to="tel:+918745945682" target="_blank" class="flex items-center gap-4 cursor-pointer">
                                 <icons-phone class="max-w-[1.6rem]"/>
-                                <p class="font-light text-[0.9rem] text-[#fff]">+2 392 3929 210</p>
+                                <p class="font-light text-[0.9rem] text-[#fff]">+91 87459 45682</p>
                             </nuxt-link>
 
-                            <nuxt-link to="mailto:easycapital@gmail.com" target="_blank" class="flex items-center gap-4 cursor-pointer">
+                            <nuxt-link to="mailto:support@easycapital.co.in" target="_blank" class="flex items-center gap-4 cursor-pointer">
                                 <icons-email class="shrink-0 max-w-[1.6rem]"/>
-                                <p class="font-light text-[0.9rem] text-[#fff] break-words">easycapital@gmail.com</p>
+                                <p class="font-light text-[0.9rem] text-[#fff] break-words">support@easycapital.co.in</p>
                             </nuxt-link>
                         </div>
                     </div>
