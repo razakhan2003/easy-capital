@@ -1,7 +1,7 @@
 <template>
     <div class="w-full pt-10 lg:pt-20 pb-10 lg:pb-20">
         <div class="container flex flex-col lg:flex-row gap-10">
-            <div class="lg:w-1/2 items-center bg-[#BFE0FF]">
+            <div class="hidden lg:block lg:w-1/2 items-center bg-[#BFE0FF]">
                 <vue3-lottie class="w-full" animationLink="./animations/how-it-works.json" />
             </div>
             <div class="lg:w-1/2 h-full flex flex-col justify-center my-auto">

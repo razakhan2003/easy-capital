@@ -1,5 +1,5 @@
 <template>
-    <div v-if="popup.show" class="fixed w-[90%] lg:w-1/3 flex flex-col bg-[#fff] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[1px] border-[#DBDBDB] rounded-lg p-10">
+    <div v-if="popup.show" class="fixed z-[40] w-[90%] lg:w-1/3 flex flex-col bg-[#fff] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[1px] border-[#DBDBDB] rounded-lg p-10">
         <div class="flex justify-between items-center mb-4">
             <!-- <custom-button @click="doNotDisturb" v-if="!dnd" title="&#128683; Do Not Disturb" /> -->
             <span @click="popup.show = false" class="ml-auto font-bold text-primary text-[1rem] cursor-pointer">&#x2715;</span>
@@ -76,7 +76,7 @@ export default{
         }
     },
     mounted(){
-        setTimeout(this.showPopup, 30000);
+       // setTimeout(this.showPopup, 30000);
     }
 }
 </script>

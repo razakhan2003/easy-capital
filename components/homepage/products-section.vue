@@ -7,13 +7,17 @@
                     Choose from a wide range of financial solutions tailored to suit your needs. We understand that every individual has unique requirements, which is why we have curated an impressive selection of products designed to cater to various purposes and budgets. 
                 </p>
             </div>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
-                <product-card v-for="product in products" :title="product.title" 
-                    :description="product.description" 
-                    :icon="product.icon"
-                    :key="product.title"/>
+            <div class="flex flex-col items-center">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+                    <div v-for="(product, index) in products">
+                        <product-card v-if="index < count" :title="product.title"
+                            :description="product.description" 
+                            :icon="product.icon"
+                            :key="product.title"/>
+                    </div>
+                </div>
+                <custom-button v-if="count <= 4" @click="toggleCount" class="max-w-fit" title="View More" />
             </div>
-            
         </div>
     </div>
 </template>
@@ -31,7 +35,18 @@ export default{
                 {title: 'Unsecure Loan', description: '"Unlock your potential with our unsecured loan - Freedom to grow without boundaries, today!"', icon: '/images/icons/unsecure-loan.svg'},
                 {title: 'Women Loan', description: '"Empowering women, one loan at a time - Achieve your dreams with our supportive financial solutions!"', icon: '/images/icons/women-loan.svg'},
                 {title: 'Ecommerce Loan', description: '"Grow your online empire with our ECommerce loan - Unleash your potential, one sale at a time!"', icon: '/images/icons/ecommerce-loan.svg'},
-            ]
+            ],
+            count: 4
+        }
+    },
+    methods: {
+        toggleCount(){
+            if(this.count <= 4){
+                this.count = this.count + 4;
+                return;
+            } 
+
+            this.count = this.count - 4;
         }
     }
 }

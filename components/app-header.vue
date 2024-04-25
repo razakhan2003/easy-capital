@@ -14,18 +14,18 @@
                         Home
                     </nuxt-link>
                 </li>
-                <hovering-dropdown :items="products">
+                <hovering-dropdown @close="show = false" :items="products">
                     <li class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]">
                         Products
                     </li>
                 </hovering-dropdown>
                 <li>
-                    <nuxt-link class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/emi-calculator">
+                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/emi-calculator">
                         EMI Calculator
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/">
+                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/">
                         About Us
                     </nuxt-link>
                 </li>
