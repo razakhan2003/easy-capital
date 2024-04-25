@@ -25,7 +25,7 @@
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/">
+                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/about-us">
                         About Us
                     </nuxt-link>
                 </li>
