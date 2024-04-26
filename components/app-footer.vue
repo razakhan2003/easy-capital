@@ -23,23 +23,23 @@
                 <div class="flex flex-col gap-4">
                     <h2 class="text-[#fff] font-semibold text-[1.2rem]">Our Products</h2>
                     <ul class="font-light text-[0.9rem] flex flex-col gap-2">
-                        <li><nuxt-link to="/">Term Loan</nuxt-link></li>
-                        <li><nuxt-link to="/">Credit Line</nuxt-link></li>
-                        <li><nuxt-link to="/">Invoice Loan</nuxt-link></li>
-                        <li><nuxt-link to="/">Machinery Loan</nuxt-link></li>
-                        <li><nuxt-link to="/">Business Loan Secure</nuxt-link></li>
-                        <li><nuxt-link to="/">Unsecure Loan</nuxt-link></li>
-                        <li><nuxt-link to="/">Women Loan</nuxt-link></li>
-                        <li><nuxt-link to="/">Ecommerce Loan</nuxt-link></li>
+                        <li><nuxt-link to="/products/term-loan">Term Loan</nuxt-link></li>
+                        <li><nuxt-link to="/products/credit-line">Credit Line</nuxt-link></li>
+                        <li><nuxt-link to="/products/invoice-loan">Invoice Loan</nuxt-link></li>
+                        <li><nuxt-link to="/products/machinery-loan">Machinery Loan</nuxt-link></li>
+                        <li><nuxt-link to="/products/business-loan">Business Loan Secure</nuxt-link></li>
+                        <li><nuxt-link to="/products/unsecure-loan">Unsecure Loan</nuxt-link></li>
+                        <li><nuxt-link to="/products/women-loan">Women Loan</nuxt-link></li>
+                        <li><nuxt-link to="/products/ecommerce-loan">Ecommerce Loan</nuxt-link></li>
                     </ul>
                 </div>
 
                 <div class="flex flex-col gap-4">
                     <h2 class="text-[#fff] font-semibold text-[1.2rem]">Quick Links</h2>
                     <ul class="font-light text-[0.9rem] flex flex-col gap-2">
-                        <li><nuxt-link to="/">About Us</nuxt-link></li>
-                        <li><nuxt-link to="/">Contact Us</nuxt-link></li>
-                        <li><nuxt-link to="/">Our Partners</nuxt-link></li>
+                        <li><nuxt-link to="/about-us">About Us</nuxt-link></li>
+                        <li><nuxt-link to="/contact-us">Contact Us</nuxt-link></li>
+                        <li><nuxt-link to="/our-partners">Our Partners</nuxt-link></li>
                     </ul>
                 </div>
 

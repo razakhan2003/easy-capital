@@ -19,11 +19,11 @@
                         Products
                     </li>
                 </hovering-dropdown>
-                <li>
+                <!-- <li>
                     <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/emi-calculator">
                         EMI Calculator
                     </nuxt-link>
-                </li>
+                </li> -->
                 <li>
                     <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/about-us">
                         About Us
@@ -40,7 +40,7 @@
                     </nuxt-link>
                 </li>
                 <li>
-                    <custom-button title="Call Us: +91-87459-45682" />
+                    <nuxt-link class="bg-primary p-2 rounded-md text-[#fff] font-medium" target="_blank" to="tel:+918745945682">Call Us: +91-87459-45682</nuxt-link>
                 </li>
             </ul>
         </div>

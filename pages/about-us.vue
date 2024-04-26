@@ -41,9 +41,6 @@
                     
                 </div>
             </div>
-            <div class="mt-10">
-                <p class="font-medium italic text-[1.2rem]">"Thank you for choosing Easy Capital as your trusted partner for business financing. We're here to help your business thrive. If you have any questions or would like to start comparing business loans, please don't hesitate to contact us. Let's take your business to new heights together."</p>
-            </div>
         </div>
     </div>
 </template>
