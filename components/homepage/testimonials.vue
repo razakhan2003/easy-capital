@@ -2,7 +2,7 @@
     <div class="w-full pt-10 lg:pt-20 pb-20">
         <div class="container">
             <div class="flex flex-col items-center gap-6">
-                <h2 class="w-full font-bold text-center text-[2.5rem]">Client Testimonials</h2>
+                <h2 class="w-full font-bold text-center text-[2.5rem]">Success Stories</h2>
                 <p class="font-light lg:w-2/3 text-[1rem] text-center">
                     Here are few stories from our satisfied clients who have successfully secured loans with us. Whether it's for personal, business, or home needs, our clients rave about our efficient loan process, competitive rates, and exceptional customer service. Explore their experiences to see how Easy Capital can help you achieve your financial goals with confidence and ease                </p>
             </div>
@@ -31,11 +31,10 @@ export default{
     data(){
         return{
             testimonials: [
-                {name: 'Rahul Yadav', place: 'Kolkata', testimonial: 'Easy Capital made securing a loan for my car repair a breeze. The application was fast and the terms were fair, with exceptional customer service. I highly recommend their reliable lending services!'},
-                {name: 'Abhisek Sinha', place: 'Kolkata', testimonial: 'Easy Capital made my dream of owning a home a reality. Their straightforward loan process and clear terms made everything stress-free. I highly recommend them for your home loan needs!'},
-                {name: 'Nilesh Kumar', place: 'Mumbai', testimonial: 'The business loan process was efficient and transparent. Their flexible terms and helpful support allowed me to grow my business with confidence. I highly recommend them for entrepreneurs.'},
-                {name: 'Seema R.', place: 'Chennai', testimonial: 'Easy Capital\'s business loan process was smooth and their competitive rates gave my business the boost it needed the most. I highly endorse them to other business owners and fellow companions.'},
-                {name: 'Mahima Dewan', place: 'Gurgaon', testimonial: 'Easy Capital made getting a personal loan quick and hassle-free. Their simple application process and great rates helped me cover unexpected expenses. I wholeheartedly recommend their services.'},
+                {name: 'Arvind Shah', place: 'Bihar', testimonial: "As a small business owner, securing a loan can be a daunting task. Easy Capital made it simple and stress-free. The platform allowed me to compare rates from various RBI-approved lenders, and I found a great deal that suited my business's needs. The customer service was exceptional, guiding me through each step of the process. I couldn't be happier with my experience!"},
+                {name: 'Eashan', place: 'Bihar', testimonial: "I was looking for a loan to expand my manufacturing business, but I didn't know where to start. Easy Capital came to the rescue. The platform was easy to use, and I appreciated the range of options from reputable NBFCs and banks. The team at Easy Capital provided excellent advice, helping me choose the best loan for my business. Thanks to them, my business is now thriving."},
+                {name: 'Pratap Kumar Roy', place: 'Telangana', testimonial: "Easy Capital is a game-changer! I was struggling to find a loan that matched my business's growth plans, but with Easy Capital, I could easily compare multiple offers from trusted lenders. Their transparent approach and focus on RBI-approved financial institutions gave me peace of mind. The application process was quick and efficient, and I received my loan in record time."},
+                {name: 'Prakash S', place: 'Uttar Pradesh', testimonial: "After searching for weeks to secure a business loan, I stumbled upon Easy Capital, and I'm so glad I did. The platform made comparing loans from different banks and NBFCs straightforward, and the customer support team was always ready to assist. With their help, I got the perfect loan to renovate my restaurant. I highly recommend Easy Capital to any business owner looking for reliable loan options."},
             ],
             breakpoints: {
                 0:{
