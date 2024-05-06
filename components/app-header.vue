@@ -54,14 +54,14 @@ export default{
             show: false,
             scrolled: false,
             products: [
-                {name: "Term Loan", route: "/products/term-loan"},
-                {name: "Credit Line", route: "/products/credit-line"},
-                {name: "Invoice Loan", route: "/products/invoice-loan"},
+                {name: "Business Loan", route: "/products/business-loan"},
+                {name: "Line of Credit", route: "/products/line-of-credit"},
+                {name: "MSME Loan", route: "/products/msme-loan"},
+                {name: "Secured Business Loan", route: "/products/secured-business-loan"},
                 {name: "Machinery Loan", route: "/products/machinery-loan"},
-                {name: "Business Loan Secure", route: "/products/business-loan"},
-                {name: "Unsecure Loan", route: "/products/unsecure-loan"},
-                {name: "Women Loan", route: "/products/women-loan"},
-                {name: "Ecommerce Loan", route: "/products/ecommerce-loan"},
+                {name: "Business Loan for Women", route: "/products/business-loan-for-women"},
+                {name: "Business Ecommerce Loan", route: "/products/business-ecommerce-loan"},
+                {name: "Loan Against Propert for Business", route: "/products/loan-against-property"},
             ]
         }
     }

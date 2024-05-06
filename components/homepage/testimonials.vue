@@ -18,7 +18,6 @@
                                 <h2 class="text-[1rem]">- {{ testimonial.name }} <span class="text-[0.8rem]">({{  testimonial.place }})</span></h2>
                             </div>
                         </div>
-                        
                     </swiper-slide>
                 </swiper>
             </div>

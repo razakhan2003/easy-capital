@@ -1,9 +1,9 @@
 <template>
     <div class="flex flex-col text-base">
-        <label>{{ label }}</label>
+        <label class="pl-1">{{ label }}</label>
         <input
             ref="input"
-            class="font-light rounded-sm duration-200 bg-gray-200 appearance-none border-2 border-gray-200 w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-[#fff] focus:border-primary"
+            class="font-light rounded-full duration-200 bg-[#EDF2F7] appearance-none border-2 border-[#fff] w-full py-2 px-4 text-gray-700 leading-tight outline-none focus:border-primary"
             :type="type"
             :value="modelValue"
             :placeholder="placeholder"

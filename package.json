@@ -15,7 +15,8 @@
     "nuxt-swiper": "^1.2.2",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
-    "vue3-lottie": "^3.3.0"
+    "vue3-lottie": "^3.3.0",
+    "vue3-otp-input": "^0.4.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

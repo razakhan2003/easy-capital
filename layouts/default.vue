@@ -2,7 +2,6 @@
     <div>
         <app-header />
         <slot />
-        <apply-modal />
         <app-footer />
     </div>
 </template>

@@ -8,12 +8,18 @@
                     <p class="font-light text-[1.1rem] mt-8">
                         {{ product.description }}
                     </p>
+                    <div class="flex flex-row gap-6 mt-8">
+                        <text-input class="lg:w-1/3" type="number" placeholder="Enter Loan Amout" label="Loan Amount" />
+                        <div class="flex items-end">
+                            <custom-button :rounded="true" class="text-[1rem]" title="Apply Now" />
+                        </div>
+                    </div>
                 </div>
                 <div class="lg:w-1/3">
                     <img class="w-full" :src="product.image" alt="">
                 </div>
             </div>
-            <div class="mt-20 lg:mt-28 flex flex-col lg:flex-row gap-10 lg:gap-20">
+            <!-- <div class="mt-20 lg:mt-28 flex flex-col lg:flex-row gap-10 lg:gap-20">
                 <div class="hidden lg:block lg:w-1/2">
                     <vue3-lottie class="w-full" animationLink="../animations/apply-animation.json" />
                 </div>
@@ -21,13 +27,11 @@
                     <h1 class="font-bold text-[2rem]">Kick Start Your Journey</h1>
                     <h1 class="font-bold text-[2rem]">With <span class="text-primary">Easy Capital</span></h1>
                     <div class="mt-8 flex flex-col gap-8">
-                        <text-input type="number" placeholder="Enter Loan Amout" label="Loan Amount" />
                         <text-input  placeholder="Enter your PAN" label="PAN" />
-                        <custom-button class="max-w-fit mx-auto lg:mx-0" title="Apply Now" />
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

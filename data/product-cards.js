@@ -1,0 +1,10 @@
+export const products = [
+    {title: 'Business Loan', description: '"Unlock your business potential with our tailored business loans - grow, thrive, succeed.""', icon: '/images/icons/term-loan.svg', target: '/products/business-loan'},
+    {title: 'Line Of Credit', description: '"Secure your financial freedom with our flexible Credit Line - Empowering your dreams, today!"', icon: '/images/icons/credit-line.svg', target: '/products/line-of-credit'},
+    {title: 'MSME Loan', description: '"Supercharge and accelerate your MSME\'s growth with our streamlined financing solution!"', icon: '/images/icons/invoice-loan.svg', target: '/products/msme-loan'},
+    {title: 'Secured Business Loan', description: '"Secure your business\'s future with our loan - Stability, growth, and peace of mind, guaranteed!"', icon: '/images/icons/business-loan.svg', target: '/products/secured-business-loan'},
+    {title: 'Machinery Loan', description: '"Fuel your business engine with our machinery loan - Transforming dreams into reality!"', icon: '/images/icons/machinery-loan.svg', target: '/products/machinery-loan'},
+    {title: 'Business Loan for Women ', description: '"Empowering women, one loan at a time - Achieve your dreams with our supportive financial solutions!"', icon: '/images/icons/women-loan.svg', target: '/products/business-loan-for-women'},
+    {title: 'Business Ecommerce Loan', description: '"Grow your online empire with our ECommerce loan - Unleash your potential, one sale at a time!"', icon: '/images/icons/ecommerce-loan.svg', target: '/products/business-ecommerce-loan'},
+    {title: 'Loan Against Property', description: '"Unlock growth potential with our Property Loan for business - Your gateway to financial freedom!"', icon: '/images/icons/unsecure-loan.svg', target: '/products/loan-against-property'},
+]
