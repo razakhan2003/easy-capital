@@ -5,10 +5,11 @@
                 <div class="lg:w-1/2 flex flex-col justify-center items-center">
                     <div v-if="step === 0" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
                         <h2 class="text-[1.2rem] font-semibold">Let’s start by filling in some basic details:</h2>
-                        <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :required="true"/>
-                        <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true"/>
+                        <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :required="true" :error="errors.name.error" :errorMessage="errors.name.message"/>
+                        <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
                         <div>
                             <label class="pl-1 mb-2">Gender*</label>
+                            <div v-if="errors.gender.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.gender.message }}</div>
                             <div class="flex items-center gap-10 pl-2">
                                 <label class="flex gap-2 items-center">
                                     <input v-model="gender" type="radio"  name="gender" value="Female">
@@ -24,9 +25,9 @@
                                 </label>
                             </div>
                         </div>
-                        <text-input v-model="email" placeholder="Enter your email id" label="Email Id*" type="email" :required="true"/>
-                        <text-input v-model="amount" placeholder="Enter your loan amount" label="Loan Amount*" type="number" :required="true"/>
-                        <custom-button @click="step++" class="max-w-fit text-[1rem] px-10 mx-auto" title="Next" :rounded="true" />
+                        <text-input v-model="email" placeholder="Enter your email id" label="Email Id*" type="email" :required="true" :error="errors.email.error" :errorMessage="errors.email.message"/>
+                        <text-input v-model="amount" placeholder="Enter your loan amount" label="Loan Amount*" type="number" :required="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
+                        <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
                     </div>
                     <div v-if="step === 1" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
                         <h2 class="font-semibold text-[1.3rem] text-center">OTP Verification</h2>
@@ -47,20 +48,22 @@
                             <span v-else @click="resendOTP" class="cursor-pointer font-light text-[0.9rem] italic underline text-primary mr-[0.4rem]">Resend OTP</span>
                         </div>
                         
-                        <custom-button @click="step++" class="max-w-fit text-[1rem] px-10 mx-auto" title="Verify OTP" :rounded="true" />
+                        <span class="text-center italic text-[#EE4B2B] text-[0.9rem]">{{ api_error }}</span>
+                        <custom-button :disabled="(sending || otp.length < 6)" @click="sending ? '' : verifyOTP()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Verify OTP'" :rounded="true" />
                     </div>
                     <div v-if="step === 2" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
-                        <text-input v-model="pan" placeholder="Enter your PAN Card number" label="PAN Card"/>
-                        <text-select v-model="business_type" label="Business Type" :options="[{name: 'Consumer', value: 'Consumer'}, {name: 'Business', value: 'Business'}]"/>
-                        <text-input v-model="company_name" placeholder="Enter your company name" label="Company Name"/>
-                        <text-select v-model="account_type" label="Account Type" :options="[{name: 'Savings Account', value: 'Savings Account'}, {name: 'Current Account', value: 'Current Account'}]"/>
-                        <text-select v-model="gst" label="GST No." :options="[{name: 'Yes', value: 'Yes'}, {name: 'No', value: 'No'}]"/>
-                        <text-select v-model="state" label="State" :options="country_states"/>
+                        <text-input v-model="pan" placeholder="Enter your PAN Card number" label="PAN Card*" :error="errors.pan.error" :errorMessage="errors.pan.message"/>
+                        <text-select v-model="business_type" label="Business Type*" :options="[{name: 'Select a Business Type', value: ''}, {name: 'Proprietorship', value: 'Proprietorship'}, {name: 'Partnership', value: 'Partnership'}, {name: 'Limited Liability Company(LLC)', value: 'Limited Liability Company(LLC)'}, {name: 'Private Limited Company', value: 'Private Limited Company'}, {name: 'One Person Company', value: 'One Person Company'}]" 
+                            :error="errors.business_type.error" :errorMessage="errors.business_type.message"/>
+                        <text-input v-model="company_name" placeholder="Enter your company name" label="Company Name*" :error="errors.company_name.error" :errorMessage="errors.company_name.message"/>
+                        <text-select v-model="account_type" label="Account Type*" :options="[{name: 'Select a Account Type', value: ''},{name: 'Savings Account', value: 'Savings Account'}, {name: 'Current Account', value: 'Current Account'}]" />
+                        <text-select v-model="gst" label="GST No.*" :options="[{name: 'Select if you have GST or not', value: ''},{name: 'Yes', value: 'Yes'}, {name: 'No', value: 'No'}]" :error="errors.gst.error" :errorMessage="errors.gst.message"/>
+                        <text-select v-model="state" label="State*" :options="country_states" :error="errors.state.error" :errorMessage="errors.state.message"/>
                         <div class="flex flex-col lg:flex-row gap-6">
-                            <text-input class="lg:w-1/2" v-model="city" placeholder="Enter your city" label="City"/>
-                            <text-input class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode"/>
+                            <text-input class="lg:w-1/2" v-model="city" placeholder="Enter your city" label="City*" :error="errors.city.error" :errorMessage="errors.city.message"/>
+                            <text-input class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode*" :error="errors.pincode.error" :errorMessage="errors.pincode.message"/>
                         </div>
-                        <custom-button class="max-w-fit text-[1rem] px-10 mx-auto" title="Submit" :rounded="true" />
+                        <custom-button :disabled="sending" @click="sending ? '' : submit()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Submit'" :rounded="true" />
 
                     </div>
                 </div>
@@ -76,6 +79,10 @@
 <script>
 import VOtpInput from "vue3-otp-input";
 import { states } from "~/data/states";
+import axios from "axios";
+import { base_url } from "~/data/endpoints";
+import uuid4 from "uuid4"; 
+import Cookies from "js-cookie"
 
 export default{
     components: {
@@ -84,6 +91,7 @@ export default{
     data(){
         return{
             step: 0,
+            order_id: "",
             name: "",
             mobile: null,
             gender: "",
@@ -99,17 +107,36 @@ export default{
             city: "",
             pincode: null,
             timeout: 59,
-            resend: false
+            resend: false,
+            errors: {
+                name: {error: false, message: "Name is required"},
+                mobile: {error: false, message: "Mobile number should be of 10 digits"},
+                gender: {error: false, message: "Gender is required"},
+                email: {error: false, message: "Email is required"},
+                amount: {error: false, message: "Amount is required"},
+                pan: {error: false, message: "Pan is required"},
+                business_type: {error: false, message: "Business Type is required"},
+                company_name: {error: false, message: "Company Name is required"},
+                gst: {error: false, message: "GST Number is required"},
+                state: {error: false, message: "State is required"},
+                city: {error: false, message: "City is required"},
+                pincode: {error: false, message: "Pincode must be of 6 digits"}
+            },
+            sending: false,
+            api_error: ""
         }
     },
     computed: {
         country_states(){
-            return states.map(s => {
+            return [{name: "Select a State", value: ""}, ...states.map(s => {
                 return {
                     value: s.name,
                     name: s.name
                 }
-            })
+            })]
+        },
+        login(){
+            return loginState().value;
         }
     },
     methods: {
@@ -123,9 +150,240 @@ export default{
                 }
             }, 1000)
         },
-        resendOTP(){
+        firstStepValidator(){
+            let error_count = 0;
+            if(!this.name){
+                this.errors.name.error = true;
+                error_count++;
+            }else{
+                this.errors.name.error = false;
+                error_count--;
+            }
+
+            if(!this.email){
+                this.errors.email.error = true;
+                error_count++;
+            }else{
+                this.errors.email.error = false;
+                error_count--;
+            }
+
+            const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            if(!this.email.match(email_pattern)){
+                this.errors.email.error = true;
+                this.errors.email.message = "Plese enter a valid email address";
+                error_count++;
+            }else{
+                this.errors.email.error = false;
+                this.errors.email.message = "Email is required";
+                error_count--;
+            }
+
+            if(!this.gender){
+                this.errors.gender.error = true;
+                error_count++;
+            }else{
+                this.errors.gender.error = false;
+                error_count--;
+            }
+
+            if(!this.mobile || this.mobile.length < 10){
+                this.errors.mobile.error = true;
+                error_count++;
+            }else{
+                this.errors.mobile.error = false;
+                error_count--;
+            }
+
+            if(!this.amount){
+                this.errors.amount.error = true;
+                error_count++;
+            }else{
+                this.errors.amount.error = false;
+                error_count--;
+            }
+
+            if(error_count > 0) return false;
+            return true;
+        },
+        secondStepValidator(){
+            let error_count = 0;
+            if(!this.pan){
+                this.errors.pan.error = true;
+                error_count++;
+            }else{
+                this.errors.pan.error = false;
+                error_count--;
+            }
+
+            if(!this.business_type){
+                this.errors.business_type.error = true;
+                error_count++;
+            }else{
+                this.errors.business_type.error = false;
+                error_count--;
+            }
+
+            if(!this.company_name){
+                this.errors.company_name.error = true;
+                error_count++;
+            }else{
+                this.errors.company_name.error = false;
+                error_count--;
+            }
+
+            if(!this.pincode || this.pincode.length < 6){
+                this.errors.pincode.error = true;
+                error_count++;
+            }else{
+                this.errors.pincode.error = false;
+                error_count--;
+            }
+
+            if(!this.state){
+                this.errors.state.error = true;
+                error_count++;
+            }else{
+                this.errors.state.error = false;
+                error_count--;
+            }
+
+            if(!this.city){
+                this.errors.city.error = true;
+                error_count++;
+            }else{
+                this.errors.city.error = false;
+                error_count--;
+            }
+
+            if(!this.gst){
+                this.errors.gst.error = true;
+                error_count++;
+            }else{
+                this.errors.gst.error = false;
+                error_count--;
+            }
+
+            if(error_count > 0) return false;
+            return true;
+        },
+        async sendOTP(){
+            if(this.firstStepValidator()){
+                this.sending = true;
+                try{
+                    const res = await axios.post(`${base_url}/login/send-otp`, {
+                        name: this.name,
+                        email: this.email,
+                        phoneNumber: this.mobile,
+                        gender: this.gender,
+                        orderId: this.order_id
+                    })
+
+                    const { message, error } = res.data;
+
+                    if(error){
+                        this.api_error = message;
+                    }else{
+                        this.api_error = "";
+                        this.step++;
+                    }
+
+                    this.sending = false;
+                }catch(e){
+                    console.log(e)
+                    this.sending = false;
+                }              
+            }
+        },
+        async verifyOTP(){
+            this.sending = true;
+            try{
+                const res = await axios.post(`${base_url}/login/verify-otp`, {
+                    email: this.email,
+                    orderId: this.order_id,
+                    phoneNumber: this.mobile,
+                    otp: this.otp
+                })
+
+                const { success, message, token } = res.data;
+
+                if(!success){
+                    this.api_error = message;
+                }else{
+                    this.api_error = "";
+                    Cookies.set("token", token);
+                    await this.getLoginDetails()
+                    this.step++;
+                }
+
+                this.sending = false;
+            }catch(e){
+                console.log(e)
+                this.sending = false;
+            }
+        },
+        async resendOTP(){
             this.resend = false;
             this.countdown();
+
+            try{
+                await axios.post(`${base_url}/login/resend-otp`, {
+                    orderId: this.order_id
+                })
+            }catch(e){
+                console.log(e);
+            }
+        },
+        async submit(){
+            if(this.secondStepValidator()){
+                this.sending = true;
+                const token = Cookies.get("token");
+                try{
+                    const res = await axios.put(`${base_url}/update-details`, {
+                        details: {
+                            pan: this.pan,
+                            business_type: this.business_type,
+                            company_name: this.company_name,
+                            account_type: this.account_type,
+                            gst: this.gst,
+                            state: this.state,
+                            city: this.city,
+                            pincode: this.pincode,
+                        }
+                    }, {headers: {
+                        "Authorization": "Bearer " + token                    
+                    }})
+
+                    if(res.status === 200){
+                        this.sending = false;
+                        this.$router.push("/dashboard")
+                    }
+
+                }catch(e){
+                    console.log(e)
+                    this.sending = false;
+                }   
+            }
+        },
+        async getLoginDetails(){
+            try{
+                const token = Cookies.get("token");
+                const res = await axios.get(`${base_url}/me`, {headers: {
+                    "Authorization": "Bearer " + token
+                }});
+
+                if(res.status === 200){
+                    const {name} = res.data;
+                    this.login.logged_in = true;
+
+                    const splitted_name = name.split(" ");
+                    this.login.user_initials = splitted_name?.at(0)?.charAt(0).toUpperCase() + splitted_name?.at(1)?.charAt(0).toUpperCase();
+                }
+
+            }catch(e){
+                this.login.logged_in = false;
+                console.log(e)
+            }
         }
     },
     watch: {
@@ -134,6 +392,9 @@ export default{
                 this.countdown();
             }
         }
+    },
+    mounted(){
+        this.order_id = uuid4();
     }
 }
 </script>

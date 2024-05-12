@@ -1,7 +1,10 @@
 <template>
     <button :type="type" ref="button" 
         class="px-4 py-2 text-[1.2rem] duration-500"
-        :class="[type == 'primary' ? 'bg-primary border-[1px] border-primary text-[#fff] font-medium hover:bg-opacity-90' : 'bg-[#fff] border-[1px] border-primary text-primary hover:bg-primary hover:text-[#fff]', rounded ? 'rounded-full' : 'rounded-md']"
+        :class="[type == 'primary' ? 'bg-primary border-[1px] border-primary text-[#fff] font-medium hover:bg-opacity-90' : 'bg-[#fff] border-[1px] border-primary text-primary hover:bg-primary hover:text-[#fff]',
+                 rounded ? 'rounded-full' : 'rounded-md',
+                 disabled ? 'opacity-75 cursor-not-allowed' : ''
+                ]"
         v-html="title"
     >
     </button>
@@ -22,7 +25,11 @@ export default{
         rounded: {
             type: Boolean,
             default: false
-        }    
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        }
     }
 }
 </script>

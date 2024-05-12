@@ -40,14 +40,32 @@
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link class="bg-primary p-2 rounded-md text-[#fff] font-medium" target="_blank" to="tel:+918745945682">Call Us: +91-87459-45682</nuxt-link>
+                    <nuxt-link class="bg-primary p-2 border-[1px] border-primary rounded-md text-[#fff] font-medium" target="_blank" to="tel:+918745945682">Call Us: +91-87459-45682</nuxt-link>
                 </li>
+                
+                <li v-if="!login.logged_in">
+                    <nuxt-link class="cursor-pointer bg-[#fff] border-[1px] border-primary p-2 rounded-md text-primary font-medium">Login</nuxt-link>
+                </li>
+
+                <hovering-dropdown @close="show = false" :items="dashboard" :arrow="false" alignment="right" v-else>
+                    <div class="cursor-pointer w-[2.5rem] h-[2.5rem] flex items-center justify-center 
+                                rounded-full border-2 border-primary
+                                text-primary font-medium">
+                        {{ login.user_initials }}
+                    </div>
+                    <template v-slot:additional>
+                        <li @click="logout" class="text-[0.9rem] font-medium text-[#EE4B2B] my-3 hover:opacity-75">Logout</li>
+                    </template>
+                </hovering-dropdown>
+
             </ul>
         </div>
     </div>
 </template>
 
 <script>
+import Cookies from "js-cookie";
+
 export default{
     data(){
         return{
@@ -62,7 +80,22 @@ export default{
                 {name: "Business Loan for Women", route: "/products/business-loan-for-women"},
                 {name: "Business Ecommerce Loan", route: "/products/business-ecommerce-loan"},
                 {name: "Loan Against Propert for Business", route: "/products/loan-against-property"},
+            ],
+            dashboard: [
+                {name: "Dashboard", route: "/dashboard"}
             ]
+        }
+    },
+    computed: {
+        login(){
+            return loginState().value;
+        }
+    },
+    methods: {
+        logout(){
+            Cookies.remove("token");
+            this.login.logged_in = false;
+            this.login.user_initials = "";
         }
     }
 }
