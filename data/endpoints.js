@@ -1,1 +1,1 @@
-export const base_url = "http://api.easycapital.co.in"
+export const base_url = "https://api.easycapital.co.in"
