@@ -3,7 +3,7 @@
         <div  class="px-[16px] lg:px-[2rem] flex justify-between items-center relative">
             <nuxt-link class="flex items-center gap-[0.3rem] font-bold text-[1.7rem]" to="/">
                 <img class="max-w-[4rem]" src="/images/easy-capital-logo.png" alt="">
-                <span><span class="text-primary">Easy</span>Capital</span>
+                <span><span class="text-[#0001FD]">Easy</span>Capital</span>
             </nuxt-link>
 
             <div class="lg:hidden">
