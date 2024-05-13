@@ -64,6 +64,7 @@ export default{
             sent: false,
             order_id: "",
             mobile: null,
+            email: "",
             otp: "",
             timeout: 59,
             resend: false,
@@ -111,12 +112,13 @@ export default{
                         login: true
                     })
 
-                    const { message, error } = res.data;
+                    const { message, error, email } = res.data;
 
                     if(error){
                         this.api_error = message;
                     }else{
                         this.api_error = "";
+                        this.email = email;
                         this.sent = true;
                     }
 
