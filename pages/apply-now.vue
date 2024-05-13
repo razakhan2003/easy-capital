@@ -188,7 +188,7 @@ export default{
                 error_count--;
             }
 
-            if(!this.mobile || this.mobile.length < 10){
+            if(!this.mobile || this.mobile.length !== 10){
                 this.errors.mobile.error = true;
                 error_count++;
             }else{
@@ -209,13 +209,29 @@ export default{
         },
         secondStepValidator(){
             let error_count = 0;
+            // if(!this.pan){
+            //     this.errors.pan.error = true;
+            //     error_count++;
+            // }else{
+            //     this.errors.pan.error = false;
+            //     error_count--;
+            // }
+
+            const pan_pattern = new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/);
             if(!this.pan){
                 this.errors.pan.error = true;
                 error_count++;
+            }
+            else if(!pan_pattern.test(this.pan)){
+                this.errors.pan.error = true;
+                this.errors.pan.message = "Plese enter a valid Pan Card Number";
+                error_count++;
             }else{
                 this.errors.pan.error = false;
+                this.errors.pan.message = "Pan is required";
                 error_count--;
             }
+
 
             if(!this.business_type){
                 this.errors.business_type.error = true;
