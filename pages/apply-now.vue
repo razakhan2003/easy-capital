@@ -29,7 +29,7 @@
                         <text-select v-model="amount" label="Loan Amount*" :options="[{name: 'Select the loan amount', value: ''},{name: '50000-100000', value: '50000-100000'}, {name: '100000-500000', value: '100000-500000'}, {name: '500000-1000000', value: '500000-1000000'}, {name: 'Greater than 1000000', value: 'Greater than 1000000'} ]" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
 
                         <!-- <text-input v-model="amount" placeholder="Enter your loan amount" label="Loan Amount*" type="number" :required="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/> -->
-                        <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
+                        <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true"/>
                     </div>
                     <div v-if="step === 1" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
                         <h2 class="font-semibold text-[1.3rem] text-center">OTP Verification</h2>
@@ -309,10 +309,10 @@ export default{
                 }catch(e){
                     console.log(e)
                     this.sending = false;
-                }              
+                }      
+                
+                this.sending = false;
             }
-
-            this.sending = false;
         },
         async verifyOTP(){
             this.sending = true;
