@@ -1,8 +1,9 @@
 <template>
     <div class="sticky top-0 z-[100] bg-[#fff] flex flex-col justify-center h-[5rem] shadow-lg">
         <div  class="px-[16px] lg:px-[2rem] flex justify-between items-center relative">
-            <nuxt-link class="font-bold text-[1.7rem]" to="/">
-                <img class="max-w-[4.5rem]" src="/images/easy-capital-logo.jpeg" alt="">
+            <nuxt-link class="flex items-center gap-[0.3rem] font-bold text-[1.7rem]" to="/">
+                <img class="max-w-[4rem]" src="/images/easy-capital-logo.png" alt="">
+                <span><span class="text-primary">Easy</span>Capital</span>
             </nuxt-link>
 
             <div class="lg:hidden">
