@@ -311,6 +311,8 @@ export default{
                     this.sending = false;
                 }              
             }
+
+            this.sending = false;
         },
         async verifyOTP(){
             this.sending = true;
@@ -338,6 +340,8 @@ export default{
                 console.log(e)
                 this.sending = false;
             }
+
+            this.sending =  false;
         },
         async resendOTP(){
             this.resend = false;
