@@ -6,7 +6,7 @@
                     <div v-if="step === 0" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
                         <h2 class="text-[1.2rem] font-semibold">Let’s start by filling in some basic details:</h2>
                         <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :required="true" :error="errors.name.error" :errorMessage="errors.name.message"/>
-                        <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
+                        <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" maxLength="10" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
                         <div>
                             <label class="pl-1 mb-2">Gender*</label>
                             <div v-if="errors.gender.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.gender.message }}</div>
@@ -54,7 +54,7 @@
                         <custom-button :disabled="(sending || otp.length < 6)" @click="sending ? '' : verifyOTP()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Verify OTP'" :rounded="true" />
                     </div>
                     <div v-if="step === 2" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
-                        <text-input v-model="pan" placeholder="Enter your PAN Card number" label="PAN Card*" :error="errors.pan.error" :errorMessage="errors.pan.message"/>
+                        <text-input v-model="pan" maxLength="10" placeholder="Enter your PAN Card number" label="PAN Card*" :error="errors.pan.error" :errorMessage="errors.pan.message"/>
                         <text-select v-model="business_type" label="Business Type*" :options="[{name: 'Select a Business Type', value: ''}, {name: 'Proprietorship', value: 'Proprietorship'}, {name: 'Partnership', value: 'Partnership'}, {name: 'Limited Liability Company(LLC)', value: 'Limited Liability Company(LLC)'}, {name: 'Private Limited Company', value: 'Private Limited Company'}, {name: 'One Person Company', value: 'One Person Company'}]" 
                             :error="errors.business_type.error" :errorMessage="errors.business_type.message"/>
                         <text-input v-model="company_name" placeholder="Enter your company name" label="Company Name*" :error="errors.company_name.error" :errorMessage="errors.company_name.message"/>
@@ -63,7 +63,7 @@
                         <text-select v-model="state" label="State*" :options="country_states" :error="errors.state.error" :errorMessage="errors.state.message"/>
                         <div class="flex flex-col lg:flex-row gap-6">
                             <text-input class="lg:w-1/2" v-model="city" placeholder="Enter your city" label="City*" :error="errors.city.error" :errorMessage="errors.city.message"/>
-                            <text-input type="number" class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode*" :error="errors.pincode.error" :errorMessage="errors.pincode.message"/>
+                            <text-input type="number" maxLength="6" class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode*" :error="errors.pincode.error" :errorMessage="errors.pincode.message"/>
                         </div>
                         <custom-button :disabled="sending" @click="sending ? '' : submit()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Submit'" :rounded="true" />
                     </div>
@@ -123,6 +123,7 @@ export default{
                 city: {error: false, message: "City is required"},
                 pincode: {error: false, message: "Pincode must be of 6 digits"}
             },
+            total_errors: 0,
             sending: false,
             api_error: ""
         }
@@ -151,141 +152,130 @@ export default{
                 }
             }, 1000)
         },
-        firstStepValidator(){
-            let error_count = 0;
+        validateFirst(){
             if(!this.name){
                 this.errors.name.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.name.error = false;
-                error_count--;
+                this.total_errors--;
             }
 
             if(!this.email){
                 this.errors.email.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.email.error = false;
-                error_count--;
+                this.total_errors--;
             }
 
             const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
             if(!this.email.match(email_pattern)){
                 this.errors.email.error = true;
                 this.errors.email.message = "Plese enter a valid email address";
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.email.error = false;
                 this.errors.email.message = "Email is required";
-                error_count--;
-            }
-
-            if(!this.gender){
-                this.errors.gender.error = true;
-                error_count++;
-            }else{
-                this.errors.gender.error = false;
-                error_count--;
+                this.total_errors--;
             }
 
             if(!this.mobile || this.mobile.length !== 10){
                 this.errors.mobile.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.mobile.error = false;
-                error_count--;
+                this.total_errors--;
+            }
+
+            if(!this.gender){
+                this.errors.gender.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.gender.error = false;
+                this.total_errors--;
             }
 
             if(!this.amount){
                 this.errors.amount.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.amount.error = false;
-                error_count--;
+                this.total_errors--;
             }
-
-            if(error_count > 0) return false;
+            
+            if(this.total_errors > 0) return false;
             return true;
         },
-        secondStepValidator(){
-            let error_count = 0;
-            // if(!this.pan){
-            //     this.errors.pan.error = true;
-            //     error_count++;
-            // }else{
-            //     this.errors.pan.error = false;
-            //     error_count--;
-            // }
-
+        validateRemaining(){
             const pan_pattern = new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/);
             if(!this.pan){
                 this.errors.pan.error = true;
-                error_count++;
+                this.total_errors++;
             }
-            else if(!pan_pattern.test(this.pan)){
+            else if(!pan_pattern.test(this.pan) || this.pan.length > 10){
                 this.errors.pan.error = true;
                 this.errors.pan.message = "Plese enter a valid Pan Card Number";
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.pan.error = false;
                 this.errors.pan.message = "Pan is required";
-                error_count--;
+                this.total_errors--;
             }
-
 
             if(!this.business_type){
                 this.errors.business_type.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.business_type.error = false;
-                error_count--;
-            }
-
-            if(!this.company_name){
-                this.errors.company_name.error = true;
-                error_count++;
-            }else{
-                this.errors.company_name.error = false;
-                error_count--;
-            }
-
-            if(!this.pincode || this.pincode.length < 6){
-                this.errors.pincode.error = true;
-                error_count++;
-            }else{
-                this.errors.pincode.error = false;
-                error_count--;
-            }
-
-            if(!this.state){
-                this.errors.state.error = true;
-                error_count++;
-            }else{
-                this.errors.state.error = false;
-                error_count--;
-            }
-
-            if(!this.city){
-                this.errors.city.error = true;
-                error_count++;
-            }else{
-                this.errors.city.error = false;
-                error_count--;
+                this.total_errors--;
             }
 
             if(!this.gst){
                 this.errors.gst.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.gst.error = false;
-                error_count--;
+                this.total_errors--;
             }
 
-            if(error_count > 0) return false;
+            if(!this.state){
+                this.errors.state.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.state.error = false;
+                this.total_errors--;
+            }
+
+            if(!this.company_name){
+                this.errors.company_name.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.company_name.error = false;
+                this.total_errors--;
+            }
+
+            if(!this.city){
+                this.errors.city.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.city.error = false;
+                this.total_errors--;
+            }
+
+            if(!this.pincode || this.pincode.length < 6){
+                this.errors.pincode.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.pincode.error = false;
+                this.total_errors--;
+            }
+            
+            if(this.total_errors > 0) return false;
             return true;
         },
         async sendOTP(){
-            if(this.firstStepValidator()){
+            if(!this.total_errors && this.validateFirst()){
                 this.sending = true;
                 try{
                     const res = await axios.post(`${base_url}/login/send-otp`, {
@@ -356,7 +346,7 @@ export default{
             }
         },
         async submit(){
-            if(this.secondStepValidator()){
+            if(!this.total_errors && this.validateRemaining()){
                 this.sending = true;
                 const token = Cookies.get("token");
                 try{
@@ -411,6 +401,132 @@ export default{
         step(){
             if(this.step === 1){
                 this.countdown();
+            }
+        },
+        name(){
+            if(!this.name){
+                this.errors.name.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.name.error = false;
+                this.total_errors--;
+            }
+        },
+        email(){
+            if(!this.email){
+                this.errors.email.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.email.error = false;
+                this.total_errors--;
+            }
+
+            const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            if(!this.email.match(email_pattern)){
+                this.errors.email.error = true;
+                this.errors.email.message = "Plese enter a valid email address";
+                this.total_errors++;
+            }else{
+                this.errors.email.error = false;
+                this.errors.email.message = "Email is required";
+                this.total_errors--;
+            }
+        },
+        mobile(){
+            if(!this.mobile || this.mobile.length !== 10){
+                this.errors.mobile.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.mobile.error = false;
+                this.total_errors--;
+            }
+        },
+        gender(){
+            if(!this.gender){
+                this.errors.gender.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.gender.error = false;
+                this.total_errors--;
+            }
+        },
+        amount(){
+            if(!this.amount){
+                this.errors.amount.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.amount.error = false;
+                this.total_errors--;
+            }
+        },
+        pan(){
+            const pan_pattern = new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/);
+            if(!this.pan){
+                this.errors.pan.error = true;
+                this.total_errors++;
+            }
+            else if(!pan_pattern.test(this.pan) || this.pan.length > 10){
+                this.errors.pan.error = true;
+                this.errors.pan.message = "Plese enter a valid Pan Card Number";
+                this.total_errors++;
+            }else{
+                this.errors.pan.error = false;
+                this.errors.pan.message = "Pan is required";
+                this.total_errors--;
+            }
+        },
+        business_type(){
+            if(!this.business_type){
+                this.errors.business_type.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.business_type.error = false;
+                this.total_errors--;
+            }
+        },
+        company_name(){
+            if(!this.company_name){
+                this.errors.company_name.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.company_name.error = false;
+                this.total_errors--;
+            }
+        },
+        gst(){
+            if(!this.gst){
+                this.errors.gst.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.gst.error = false;
+                this.total_errors--;
+            }
+        },
+        state(){
+            if(!this.state){
+                this.errors.state.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.state.error = false;
+                this.total_errors--;
+            }
+        },
+        city(){
+            if(!this.city){
+                this.errors.city.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.city.error = false;
+                this.total_errors--;
+            }
+        },
+        pincode(){
+            if(!this.pincode || this.pincode.length < 6){
+                this.errors.pincode.error = true;
+                this.total_errors++;
+            }else{
+                this.errors.pincode.error = false;
+                this.total_errors--;
             }
         }
     },

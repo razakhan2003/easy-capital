@@ -10,6 +10,7 @@
             :value="modelValue"
             :placeholder="placeholder"
             :required="required"
+            :maxlength="maxLength"
             @input="$emit('update:modelValue', $event.target.value)"
         >
     </div>
@@ -44,6 +45,10 @@ export default{
             default: false
         },
         errorMessage: {
+            type: String,
+            default: ''
+        },
+        maxLength: {
             type: String,
             default: ''
         }

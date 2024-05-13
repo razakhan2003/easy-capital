@@ -7,7 +7,7 @@
                         <h2 class="text-[1.2rem] font-semibold mb-[2rem]">Log into your account:</h2>
 
                         <div v-if="!sent" class="flex flex-col gap-6">
-                            <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
+                            <text-input v-model="mobile" maxLength="10" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
                             <span v-if="api_error" class="text-center italic text-[#EE4B2B] text-[0.9rem]">{{ api_error }}</span>
                             <div class="flex flex-col gap-2">
                                 <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 ml-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true" />
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 flex flex-col gap-10 items-center justify-center">
-                    <h2 class="font-semibold text-[1.5rem]">Welcome back to EasyCapital!</h2>
+                    <h2 class="font-semibold text-[1.5rem]">Welcome Back to EasyCapital!</h2>
                     <img class="w-[80%]" src="/images/apply-now.svg" alt="">
                 </div>
             </div>
@@ -71,7 +71,8 @@ export default{
                 mobile: {error: false, message: "Mobile number should be of 10 digits"}
             },
             sending: false,
-            api_error: ""
+            api_error: "",
+            total_errors: 0
         }
     },
     computed: {
@@ -91,21 +92,19 @@ export default{
             }, 1000)
         },
         firstStepValidator(){
-            let error_count = 0;
-
             if(!this.mobile || this.mobile.length !== 10){
                 this.errors.mobile.error = true;
-                error_count++;
+                this.total_errors++;
             }else{
                 this.errors.mobile.error = false;
-                error_count--;
+                this.total_errors--;
             }
 
-            if(error_count > 0) return false;
+            if(this.total_errors > 0) return false;
             return true;
         },
         async sendOTP(){
-            if(this.firstStepValidator()){
+            if(!this.total_errors && this.firstStepValidator()){
                 this.sending = true;
                 try{
                     const res = await axios.post(`${base_url}/login/send-otp`, {
@@ -149,7 +148,8 @@ export default{
                 }else{
                     this.api_error = "";
                     Cookies.set("token", token);
-                    await this.getLoginDetails()
+                    await this.getLoginDetails();
+                    this.$router.push("/dashboard")
                 }
 
                 this.sending = false;
@@ -198,6 +198,9 @@ export default{
             if(this.sent){
                 this.countdown();
             }
+        },
+        mobile(){
+            this.firstStepValidator();
         }
     },
     mounted(){
