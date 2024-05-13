@@ -26,7 +26,9 @@
                             </div>
                         </div>
                         <text-input v-model="email" placeholder="Enter your email id" label="Email Id*" type="email" :required="true" :error="errors.email.error" :errorMessage="errors.email.message"/>
-                        <text-input v-model="amount" placeholder="Enter your loan amount" label="Loan Amount*" type="number" :required="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
+                        <text-select v-model="amount" label="Loan Amount*" :options="[{name: 'Select the loan amount', value: ''},{name: '50000-100000', value: '50000-100000'}, {name: '100000-500000', value: '100000-500000'}, {name: '500000-1000000', value: '500000-1000000'}, {name: 'Greater than 1000000', value: 'Greater than 1000000'} ]" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
+
+                        <!-- <text-input v-model="amount" placeholder="Enter your loan amount" label="Loan Amount*" type="number" :required="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/> -->
                         <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true" :error="errors.amount.error" :errorMessage="errors.amount.message"/>
                     </div>
                     <div v-if="step === 1" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
@@ -61,10 +63,9 @@
                         <text-select v-model="state" label="State*" :options="country_states" :error="errors.state.error" :errorMessage="errors.state.message"/>
                         <div class="flex flex-col lg:flex-row gap-6">
                             <text-input class="lg:w-1/2" v-model="city" placeholder="Enter your city" label="City*" :error="errors.city.error" :errorMessage="errors.city.message"/>
-                            <text-input class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode*" :error="errors.pincode.error" :errorMessage="errors.pincode.message"/>
+                            <text-input type="number" class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode*" :error="errors.pincode.error" :errorMessage="errors.pincode.message"/>
                         </div>
                         <custom-button :disabled="sending" @click="sending ? '' : submit()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Submit'" :rounded="true" />
-
                     </div>
                 </div>
                 <div class="lg:w-1/2 flex flex-col gap-10 items-center justify-center">
