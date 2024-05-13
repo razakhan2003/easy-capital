@@ -94,17 +94,15 @@ export default{
         firstStepValidator(){
             if(!this.mobile || this.mobile.length !== 10){
                 this.errors.mobile.error = true;
-                this.total_errors++;
             }else{
                 this.errors.mobile.error = false;
-                this.total_errors--;
             }
 
-            if(this.total_errors > 0) return false;
+            if(this.errors.mobile.error > 0) return false;
             return true;
         },
         async sendOTP(){
-            if(!this.total_errors && this.firstStepValidator()){
+            if(!this.errors.mobile.error && this.firstStepValidator()){
                 this.sending = true;
                 try{
                     const res = await axios.post(`${base_url}/login/send-otp`, {
@@ -200,7 +198,11 @@ export default{
             }
         },
         mobile(){
-            this.firstStepValidator();
+            if(!this.mobile || this.mobile.length !== 10){
+                this.errors.mobile.error = true;
+            }else{
+                this.errors.mobile.error = false;
+            }
         }
     },
     mounted(){
