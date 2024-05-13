@@ -98,7 +98,7 @@ export default{
                 this.errors.mobile.error = false;
             }
 
-            if(this.errors.mobile.error > 0) return false;
+            if(this.errors.mobile.error) return false;
             return true;
         },
         async sendOTP(){
