@@ -12,12 +12,12 @@
                             <div v-if="errors.gender.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.gender.message }}</div>
                             <div class="flex items-center gap-10 pl-2">
                                 <label class="flex gap-2 items-center">
-                                    <input v-model="gender" type="radio"  name="gender" value="Female">
-                                    Female
-                                </label>
-                                <label class="flex gap-2 items-center">
                                     <input v-model="gender" type="radio"  name="gender" value="Male">
                                     Male
+                                </label>
+                                <label class="flex gap-2 items-center">
+                                    <input v-model="gender" type="radio"  name="gender" value="Female">
+                                    Female
                                 </label>
                                 <label class="flex gap-2 items-center">
                                     <input v-model="gender" type="radio"  name="gender" value="Other">
