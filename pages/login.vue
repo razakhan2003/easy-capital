@@ -251,9 +251,9 @@ export default{
                 }});
 
                 if(res.status === 200){
-                    const {name} = res.data;
+                    const {name, userId} = res.data;
                     this.login.logged_in = true;
-
+                    this.login.user_id = userId;
                     const splitted_name = name.split(" ");
                     this.login.user_initials = splitted_name?.at(0)?.charAt(0).toUpperCase() + splitted_name?.at(1)?.charAt(0).toUpperCase();
                 }
