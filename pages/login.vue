@@ -184,7 +184,6 @@ export default{
                         this.api_error = message;
                     }else{
                         this.api_error = "";
-                        this.email = email;
                         this.step++;
                     }
 
@@ -213,12 +212,12 @@ export default{
                     this.api_error = message;
                 }else{
                     this.api_error = "";
-                    Cookies.set("token", token);
-                    await this.getLoginDetails();
 
                     if(this.type === "new"){
                         this.step++;
                     }else{
+                        Cookies.set("token", token);
+                        await this.getLoginDetails();
                         this.$router.push("/dashboard")
                     }
                 }
@@ -269,22 +268,17 @@ export default{
                 const token = Cookies.get("token");
                 try{
                     const res = await axios.put(`${base_url}/update-details`, {
-                        details: {
-                            pan: this.pan,
-                            business_type: this.business_type,
-                            company_name: this.company_name,
-                            account_type: this.account_type,
-                            gst: this.gst,
-                            state: this.state,
-                            city: this.city,
-                            pincode: this.pincode,
-                        }
+                        email: this.email,
+                        name: this.name,
+                        gender: this.gender,
                     }, {headers: {
                         "Authorization": "Bearer " + token                    
                     }})
 
                     if(res.status === 200){
                         this.sending = false;
+                        Cookies.set("token", token);
+                        await this.getLoginDetails();
                         this.$router.push("/dashboard")
                     }
 
