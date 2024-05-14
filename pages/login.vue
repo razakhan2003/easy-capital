@@ -214,6 +214,7 @@ export default{
                     this.api_error = "";
 
                     if(this.type === "new"){
+                        Cookies.set("token", token);
                         this.step++;
                     }else{
                         Cookies.set("token", token);
