@@ -43,7 +43,7 @@
            border-2 border-[#ececec] rounded-lg bg-[#fff] z-[20]">
             <h2 class="font-bold text-[1.3rem] text-center">Thank you for your interest.</h2>
             <h4 class="font-semibold text-[1rem] text-center mt-8">Our representative will contact you within 24 hours.</h4>
-            <custom-button @click="show = false" class="mt-8 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" title="Okay" />
+            <custom-button @click="show = false" class="mt-8 mx-auto w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" title="Okay" />
           </div>
     </div>
 </template>
@@ -108,7 +108,9 @@ export default{
               lender,
               date
             }
-          })
+          }, {headers: {
+            "Authorization": "Bearer " + token, 
+          }})
 
           if(res.status === 200){
             this.sending = -1;
