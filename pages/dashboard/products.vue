@@ -7,8 +7,8 @@
                     :icon="product.icon"
                     :key="product.title"
                     :apply="true"
-                    :disabled="product.status"
-                    :btnText="product.status ? 'Applied' : 'Apply'"
+                    :disabled="(product.status || sending === index)"
+                    :btnText="sending === index ? 'Applying...' : product.status ? 'Applied' : 'Apply'"
                     @submit="apply(index)"
                     />
             </div>
@@ -72,7 +72,7 @@ export default{
         },
         async apply(index){
             const applied_date = this.formatDate(new Date())
-            await this.sendData(this.products[index].name, applied_date, index)
+            await this.sendData(this.products[index].title, applied_date, index)
             this.products[index].status = true;
             this.parseData();
             this.mapProducts();

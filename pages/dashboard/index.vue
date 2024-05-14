@@ -35,7 +35,7 @@
                 </div>
                 
                   <custom-button @click="apply(index)" :disabled="(lender.status === 'Applied' || sending === index) ? true : false" 
-                    class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="sending === index ? 'Applying' : lender.status === 'Applied' ? 'Applied' : 'Apply'" />
+                    class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="sending === index ? 'Applying...' : lender.status === 'Applied' ? 'Applied' : 'Apply'" />
                 
             </div>
         </div>
