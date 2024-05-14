@@ -45,7 +45,7 @@
                 </li>
                 
                 <li v-if="!login.logged_in">
-                    <nuxt-link to="/login" class="cursor-pointer bg-[#fff] border-[1px] border-primary p-2 rounded-md text-primary font-medium">Login</nuxt-link>
+                    <nuxt-link @click="show = false" to="/login" class="cursor-pointer bg-[#fff] border-[1px] border-primary p-2 rounded-md text-primary font-medium">Login</nuxt-link>
                 </li>
 
                 <hovering-dropdown @close="show = false" :items="dashboard" :arrow="false" alignment="right" v-else>

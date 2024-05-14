@@ -292,7 +292,7 @@ export default{
     },
     watch: {
         step(){
-            if(this.sent){
+            if(this.step === 1){
                 this.countdown();
             }
         },
