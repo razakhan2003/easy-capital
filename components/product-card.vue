@@ -5,13 +5,14 @@
         </div>
         <h2 class="text-[1.2rem] font-semibold">{{ title }}</h2>
         <p class="text-[1rem] font-light">{{  description }}</p>
-        <custom-button class="mt-auto mr-auto text-[1rem]" v-if="apply" title="Apply Now" />
+        <custom-button @click="$emit('submit')" :disabled="disabled" class="mt-auto mr-auto text-[1rem]" 
+            v-if="apply" :title="btnText ? btnText : 'Apply'" />
     </nuxt-link>
 </template>
 
 <script>
 export default{
-    props: ['title', 'description', 'icon', 'target', 'apply'],
+    props: ['title', 'description', 'icon', 'target', 'apply', 'btnText', 'disabled'],
     emits: ['submit']
 }
 </script>

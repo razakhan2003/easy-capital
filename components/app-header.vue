@@ -97,6 +97,7 @@ export default{
             Cookies.remove("token");
             this.login.logged_in = false;
             this.login.user_initials = "";
+            this.login.user_id = "";
         }
     }
 }

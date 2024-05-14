@@ -6,7 +6,7 @@
                 <nuxt-link class="cursor-pointer hover:text-[#ececec] duration-[300ms]">Offers</nuxt-link>
                 <nuxt-link to="/dashboard/products" class="cursor-pointer hover:text-[#ececec] duration-[300ms]">Products</nuxt-link>
                 <nuxt-link class="cursor-pointer hover:text-[#ececec] duration-[300ms]">Support</nuxt-link>
-                <nuxt-link class="cursor-pointer hover:text-[#ececec] duration-[300ms]">Logout</nuxt-link>
+                <nuxt-link @click="logout" class="cursor-pointer hover:text-[#ececec] duration-[300ms]">Logout</nuxt-link>
             </div>
         </div>
        
@@ -17,7 +17,23 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
+
 export default{
-    props: ['sidebar']
+    props: ['sidebar'],
+    computed: {
+        login(){
+            return loginState().value;
+        }
+    },
+    methods: {
+        logout(){
+            Cookies.remove("token");
+            this.login.logged_in = false;
+            this.login.user_initials = "";
+            this.login.user_id = "";
+            this.$router.push("/")
+        }
+    }
 }
 </script>

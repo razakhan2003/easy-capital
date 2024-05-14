@@ -35,7 +35,7 @@
                 </div>
                 
                   <custom-button @click="apply(index)" :disabled="(lender.status === 'Applied' || sending === index) ? true : false" 
-                    class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="lender.status === 'Applied' ? 'Applied' : 'Apply'" />
+                    class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="sending === index ? 'Applying' : lender.status === 'Applied' ? 'Applied' : 'Apply'" />
                 
             </div>
         </div>
@@ -44,7 +44,7 @@
             <h2 class="font-bold text-[1.3rem] text-center">Thank you for your interest.</h2>
             <h4 class="font-semibold text-[1rem] text-center mt-8">Our representative will contact you within 24 hours.</h4>
             <custom-button @click="show = false" class="mt-8 mx-auto w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" title="Okay" />
-          </div>
+        </div>
     </div>
 </template>
 
@@ -75,7 +75,7 @@ export default{
   methods: {
     parseData(){
       const lenders = JSON.stringify(this.lenders);
-      Cookies.set("lenders", lenders);
+      Cookies.set("lenders", lenders, { expires: 15 });
     },
     unparseData(){
       if(Cookies.get("lenders")){
