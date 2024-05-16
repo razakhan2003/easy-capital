@@ -1,6 +1,6 @@
 <template>
     <div class="relative flex flex-col text-base">
-        <label class="pl-1">{{ label }}</label>
+        <label :class="enlarge ? 'text-[1.3rem] mb-2 font-semibold' : ''" class="pl-1">{{ label }}</label>
         <span v-if="error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errorMessage }}</span>
         <div class="relative">
             <select 
@@ -46,6 +46,10 @@ export default{
         errorMessage: {
             type: String,
             default: ''
+        },
+        enlarge: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['update:modelValue']

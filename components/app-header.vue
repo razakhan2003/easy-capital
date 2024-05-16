@@ -11,12 +11,12 @@
             </div>
             <ul :class="show ? 'flex lg:flex' : 'hidden lg:flex'" class="bg-[#fff] w-full lg:w-auto px-[16px] lg:px-0 py-6 lg:py-0 absolute left-0 top-full lg:relative flex-col lg:flex-row lg:items-center gap-[2rem]">
                 <li>
-                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/">
+                    <nuxt-link @click="show = false" :class="$route.name == 'index' ? 'text-primary' : ''" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/">
                         Home
                     </nuxt-link>
                 </li>
                 <hovering-dropdown @close="show = false" :items="products">
-                    <li class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]">
+                    <li :class="$route.name == 'products-slug' ? 'text-primary' : ''"  class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]">
                         Products
                     </li>
                 </hovering-dropdown>
@@ -26,17 +26,17 @@
                     </nuxt-link>
                 </li> -->
                 <li>
-                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/about-us">
+                    <nuxt-link @click="show = false" :class="$route.name == 'about-us' ? 'text-primary' : ''" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/about-us">
                         About Us
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/our-partners">
+                    <nuxt-link @click="show = false" :class="$route.name == 'our-partners' ? 'text-primary' : ''" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/our-partners">
                         Our Partners
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link @click="show = false" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/contact-us">
+                    <nuxt-link @click="show = false" :class="$route.name == 'contact-us' ? 'text-primary' : ''" class="font-medium hover:text-primary duration-[200ms] text-[1.1rem]" to="/contact-us">
                         Contact Us
                     </nuxt-link>
                 </li>

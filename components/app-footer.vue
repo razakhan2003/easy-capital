@@ -23,14 +23,7 @@
                 <div class="flex flex-col gap-4">
                     <h2 class="text-[#fff] font-semibold text-[1.2rem]">Our Products</h2>
                     <ul class="font-light text-[0.9rem] flex flex-col gap-2">
-                        <li><nuxt-link to="/products/term-loan">Term Loan</nuxt-link></li>
-                        <li><nuxt-link to="/products/credit-line">Credit Line</nuxt-link></li>
-                        <li><nuxt-link to="/products/invoice-loan">Invoice Loan</nuxt-link></li>
-                        <li><nuxt-link to="/products/machinery-loan">Machinery Loan</nuxt-link></li>
-                        <li><nuxt-link to="/products/business-loan">Business Loan Secure</nuxt-link></li>
-                        <li><nuxt-link to="/products/unsecure-loan">Unsecure Loan</nuxt-link></li>
-                        <li><nuxt-link to="/products/women-loan">Women Loan</nuxt-link></li>
-                        <li><nuxt-link to="/products/ecommerce-loan">Ecommerce Loan</nuxt-link></li>
+                        <li v-for="product in products" :key="product.name"><nuxt-link :to="product.route">{{ product.name }}</nuxt-link></li>
                     </ul>
                 </div>
 
@@ -77,7 +70,17 @@
 export default{
     data(){
         return{
-            year: null
+            year: null,
+            products: [
+                {name: "Business Loan", route: "/products/business-loan"},
+                {name: "Line of Credit", route: "/products/line-of-credit"},
+                {name: "MSME Loan", route: "/products/msme-loan"},
+                {name: "Secured Business Loan", route: "/products/secured-business-loan"},
+                {name: "Machinery Loan", route: "/products/machinery-loan"},
+                {name: "Business Loan for Women", route: "/products/business-loan-for-women"},
+                {name: "Business Ecommerce Loan", route: "/products/business-ecommerce-loan"},
+                {name: "Loan Against Propert for Business", route: "/products/loan-against-property"},
+            ],
         }
     },
     mounted(){

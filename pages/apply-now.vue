@@ -5,8 +5,8 @@
                 <div class="lg:w-1/2 flex flex-col justify-center items-center">
                     <div v-if="step === 0" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
                         <h2 class="text-[1.2rem] font-semibold">Let’s start by filling in some basic details:</h2>
-                        <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :required="true" :error="errors.name.error" :errorMessage="errors.name.message"/>
-                        <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" maxLength="10" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
+                        <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :onlyAlphabets="true" :error="errors.name.error" :errorMessage="errors.name.message"/>
+                        <text-input v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" maxLength="10" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
                         <div>
                             <label class="pl-1 mb-2">Gender*</label>
                             <div v-if="errors.gender.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.gender.message }}</div>
@@ -425,6 +425,7 @@ export default{
             }
         },
         pan(){
+            this.pan = this.pan.toUpperCase();
             const pan_pattern = new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/);
             if(!this.pan){
                 this.errors.pan.error = true;
@@ -482,6 +483,9 @@ export default{
     },
     mounted(){
         this.order_id = uuid4();
+        if(this.$route.query.amount){
+            this.amount = this.$route.query.amount;
+        }
     }
 }
 </script>

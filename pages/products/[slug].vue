@@ -9,13 +9,13 @@
                         {{ product.description }}
                     </p>
                     <div class="flex flex-row gap-6 mt-8">
-                        <text-input class="lg:w-1/3" type="number" placeholder="Enter Loan Amout" label="Loan Amount" />
+                        <text-select class="w-[70%] lg:w-1/3" v-model="amount" label="Loan Amount" :options="[{name: 'Select the loan amount', value: ''},{name: '50000-100000', value: '50000-100000'}, {name: '100000-500000', value: '100000-500000'}, {name: '500000-1000000', value: '500000-1000000'}, {name: 'Greater than 1000000', value: 'Greater than 1000000'}]" :enlarge="true" />
                         <div class="flex items-end">
-                            <custom-button :rounded="true" class="text-[1rem]" title="Apply Now" />
+                            <custom-button @click="apply" :rounded="true" class="text-[1rem]" title="Apply Now" />
                         </div>
                     </div>
                 </div>
-                <div class="lg:w-1/3">
+                <div class="mx-auto w-[60%] lg:w-1/3">
                     <img class="w-full" :src="product.image" alt="">
                 </div>
             </div>
@@ -44,12 +44,20 @@ export default{
     components: {Vue3Lottie},
     data(){
         return{
-            products: products
+            products: products,
+            amount: null
         }
     },
     computed: {
         product(){
             return this.products.filter(p => p.slug === this.$route.params.slug).at(0)
+        }
+    },
+    methods: {
+        apply(){
+            if(this.amount){
+                this.$router.push({path: '/apply-now', query: {amount: this.amount}})
+            }
         }
     }
 }
