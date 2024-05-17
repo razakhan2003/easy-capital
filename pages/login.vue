@@ -263,7 +263,7 @@ export default{
                     this.login.logged_in = true;
                     this.login.user_id = userId;
                     const splitted_name = name.split(" ");
-                    this.login.user_initials = splitted_name?.at(0)?.charAt(0).toUpperCase() + splitted_name?.at(1)?.charAt(0).toUpperCase();
+                    this.login.user_initials = splitted_name?.at(0)?.charAt(0).toUpperCase() + (splitted_name?.at(1)?.charAt(0).toUpperCase() ?? '');
                 }
 
             }catch(e){
