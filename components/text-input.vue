@@ -60,6 +60,10 @@ export default{
         onlyAlphabets: {
             type: Boolean,
             default: false
+        },
+        focus: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['update:modelValue'],
@@ -84,6 +88,11 @@ export default{
                     event.preventDefault();
                 }
             }
+        }
+    },
+    mounted(){
+        if(this.focus){
+            this.$refs.input.focus();
         }
     }
 }

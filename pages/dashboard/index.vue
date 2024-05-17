@@ -34,19 +34,19 @@
                   <h4 class="font-semibold text-[0.8rem]">{{ lender.loan_amount }}</h4>
                 </div>
                 
-                  <custom-button @click="apply(index)" :disabled="(lender.status === 'Applied' || sending === index) ? true : false" 
+                  <custom-button @click="(lender.status === 'Applied' || sending === index) ? '' : apply(index)" :disabled="(lender.status === 'Applied' || sending === index) ? true : false" 
                     class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="sending === index ? 'Applying...' : lender.status === 'Applied' ? 'Applied' : 'Apply'" />
                 
             </div>
         </div>
-        <div v-if="show" @click="show = false" class="fixed w-full h-full top-0 left-0 bg-[#000] bg-opacity-75 z-[100]">
+        <!-- <div v-if="show" @click="show = false" class="fixed w-full h-full top-0 left-0 bg-[#000] bg-opacity-75 z-[100]">
           <div @click.stop="" class="p-10 w-[90%] lg:w-[25%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
             border-2 border-[#ececec] rounded-lg bg-[#fff] z-[20] flex flex-col justify-center">
               <h2 class="font-bold text-[1.3rem] text-center">Thank you for your interest.</h2>
               <h4 class="font-semibold text-[1rem] text-center mt-8">Our representative will contact you within 24 hours.</h4>
               <custom-button @click="show = false" class="mt-8 mx-auto w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" title="Okay" />
           </div>
-        </div>
+        </div> -->
         
     </div>
 </template>
@@ -86,13 +86,17 @@ export default{
       }
     },
     async apply(index){
+      if(this.lenders[index].name === 'IIFL Finance'){
+        window.open("https://iifl-loans.finbox.in/?partnerCode=EC_BQHUWE", '_blank').focus();
+        return;
+      }
       const applied_date = this.formatDate(new Date())
       await this.sendData(this.lenders[index].name, applied_date, index)
       this.lenders[index].status = 'Applied';
       this.lenders[index].date = applied_date;
       this.parseData();
       this.unparseData();
-      this.show = true;
+      this.$router.push("/dashboard/thank-you");
     },
     formatDate(date){
       const year = date.getFullYear();

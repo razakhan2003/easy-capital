@@ -9,18 +9,18 @@
                     :apply="true"
                     :disabled="(product.status || sending === index)"
                     :btnText="sending === index ? 'Applying...' : product.status ? 'Applied' : 'Apply'"
-                    @submit="apply(index)"
+                    @submit="(product.status || sending === index) ? '' : apply(index)"
                     />
             </div>
         </div>
-        <div v-if="show" @click="show = false" class="fixed w-full h-full top-0 left-0 bg-[#000] bg-opacity-75 z-[100]">
+        <!-- <div v-if="show" @click="show = false" class="fixed w-full h-full top-0 left-0 bg-[#000] bg-opacity-75 z-[100]">
             <div class="p-10 w-[90%] lg:w-[25%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                 border-2 border-[#ececec] rounded-lg bg-[#fff] z-[20] flex flex-col justify-center">
                 <h2 class="font-bold text-[1.3rem] text-center">Thank you for your interest.</h2>
                 <h4 class="font-semibold text-[1rem] text-center mt-8">Our representative will contact you within 24 hours.</h4>
                 <custom-button @click="show = false" class="mt-8 mx-auto w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" title="Okay" />
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -78,7 +78,7 @@ export default{
             this.products[index].status = true;
             this.parseData();
             this.mapProducts();
-            this.show = true;
+            this.$router.push("/dashboard/thank-you");
         },
         async sendData(product, date, index){
             this.sending = index;

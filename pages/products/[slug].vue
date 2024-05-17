@@ -51,11 +51,19 @@ export default{
     computed: {
         product(){
             return this.products.filter(p => p.slug === this.$route.params.slug).at(0)
+        },
+        login(){
+            return loginState().value;
         }
     },
     methods: {
         apply(){
             if(this.amount){
+                if(this.login.logged_in){
+                    this.$router.push("/dashboard");
+                    return;
+                }
+                
                 this.$router.push({path: '/apply-now', query: {amount: this.amount}})
             }
         }
