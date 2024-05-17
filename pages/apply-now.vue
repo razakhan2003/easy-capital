@@ -32,18 +32,11 @@
                         <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true"/>
                     </div>
                     <div v-if="step === 1" class="w-full my-auto p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
-                        <div v-if="!tnc_submit" class="flex flex-col gap-6">
-                            <p class="text-[0.9rem] font-light text-justify">
-                                I further consent to receive the loan and product updates of Easy Capital on whatsapp and allow Easy Capital and/or their authorised third party service providers to contact me for marketing purposes via SMS, Telephone, Email or any other means.By opting for Easy Capital, I agree to have read, understood and explicitly consent to the T&C and Privacy Policy.
-                            </p>
-                            <label class="flex gap-2 items-center">
-                                <input v-model="tnc" value="agreed" type="checkbox" id="tnc" name="tnc" />
-                                <span class="text-[0.9rem] font-semibold">I Agree</span>
-                            </label>
-                            <custom-button :disabled="!tnc.includes('agreed') ? true : false" @click="!tnc.includes('agreed') ? '' : tnc_submit = true"  class="max-w-fit text-[1rem] px-10 mx-auto" title="Submit" :rounded="true" />
-                        </div>
+                        <!-- <div v-if="!tnc_submit" class="flex flex-col gap-6">
+                            
+                        </div> -->
                         
-                        <div v-if="tnc.includes('agreed') && tnc_submit" class="flex flex-col gap-6">
+                        <div class="flex flex-col gap-6">
                             <h2 class="font-semibold text-[1.3rem] text-center">OTP Verification</h2>
                             <h2 class="font-medium text-[1rem] text-center">One Time Password (OTP) has been sent via SMS to <br>+91-{{ mobile }}</h2>
                             <h2 class="font-medium text-[1rem] text-center">Enter the OTP below to verify it.</h2>
@@ -63,9 +56,16 @@
                                 <span v-if="!resend" class="font-medium text-[0.9rem] mr-[0.4rem]">Resend OTP in {{ timeout }}s</span>
                                 <span v-else @click="resendOTP" class="cursor-pointer font-light text-[0.9rem] italic underline text-primary mr-[0.4rem]">Resend OTP</span>
                             </div>
-                        
+                            
+                            <div class="flex gap-6 items-start">
+                                <input class="mt-1" v-model="tnc" value="agreed" type="checkbox" id="tnc" name="tnc" />
+                                <p class="text-[0.9rem] font-light text-justify">
+                                    I further consent to receive the loan and product updates of Easy Capital on whatsapp and allow Easy Capital and/or their authorised third party service providers to contact me for marketing purposes via SMS, Telephone, Email or any other means.     
+                                </p>
+                            </div>
+                            
                             <span class="text-center italic text-[#EE4B2B] text-[0.9rem]">{{ api_error }}</span>
-                            <custom-button :disabled="(sending || otp.length < 6)" @click="sending ? '' : verifyOTP()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Verify OTP'" :rounded="true" />
+                            <custom-button :disabled="(sending || otp.length < 6 || !tnc.includes('agreed'))" @click="(sending || otp.length < 6 || !tnc.includes('agreed')) ? '' : verifyOTP()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Verify OTP'" :rounded="true" />
                         </div>
                         
                     </div>
@@ -184,7 +184,7 @@ export default{
                 this.errors.email.error = false;
             }
 
-            const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            const email_pattern = /(.+)@(.+){2,}\.(.+){2,}/; 
             if(!this.email.match(email_pattern)){
                 this.errors.email.error = true;
                 this.errors.email.message = "Plese enter a valid email address";
@@ -402,16 +402,7 @@ export default{
     watch: {
         step(){
             if(this.step === 1){
-                if(this.tnc_submit){
-                    this.countdown();
-                }
-            }
-        },
-        tnc_submit(){
-            if(this.step === 1){
-                if(this.tnc_submit){
-                    this.countdown();
-                }
+                this.countdown();
             }
         },
         name(){
@@ -428,7 +419,7 @@ export default{
                 this.errors.email.error = false;
             }
 
-            const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            const email_pattern = /(.+)@(.+){2,}\.(.+){2,}/; 
             if(!this.email.match(email_pattern)){
                 this.errors.email.error = true;
                 this.errors.email.message = "Plese enter a valid email address";

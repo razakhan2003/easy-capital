@@ -84,9 +84,9 @@ export default{
             }
             
             if(this.onlyAlphabets){
-                if(!((key> 64 && key< 91) || (key > 7 && key < 47))){
-                    event.preventDefault();
-                }
+                let char = String.fromCharCode(key); // Get the character4
+                if(/^[A-Za-z ]+$/.test(char)) return true; // Match with regex 
+                else event.preventDefault();
             }
         }
     },
