@@ -84,7 +84,7 @@ export default{
             }
             
             if(this.onlyAlphabets){
-                let char = String.fromCharCode(key); // Get the character4
+                let char = String.fromCharCode(key); // Get the character
                 if(/^[A-Za-z ]+$/.test(char)) return true; // Match with regex 
                 else event.preventDefault();
             }

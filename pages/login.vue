@@ -40,7 +40,15 @@
 
                         <div v-if="step === 2" class="flex flex-col gap-6">
                             <h2 class="text-[1.2rem] font-semibold">Since you're a new user, we need a few more info:</h2>
-                            <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :required="true" :error="errors.name.error" :errorMessage="errors.name.message"/>
+                            <div class="flex flex-col text-base">
+                                <label class="pl-1">Name*</label>
+                                <span v-if="errors.name.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.name.message }}</span>
+                                <input placeholder="Enter your name as per PAN Card"
+                                    :class="errors.name.error ? 'border-[#EE4B2B] focus:border-[#EE4B2B]' : 'border-[#fff] focus:border-primary'"
+                                    class="font-light rounded-full duration-200 bg-[#EDF2F7] appearance-none border-2 w-full py-2 px-4 text-gray-700 leading-tight outline-none"
+                                    v-model="name"
+                                >
+                            </div>                           
                             <text-input v-model="email" placeholder="Enter your email id" label="Email Id*" type="email" :required="true" :error="errors.email.error" :errorMessage="errors.email.message"/>
                             <div>
                                 <label class="pl-1 mb-2">Gender*</label>
@@ -146,7 +154,7 @@ export default{
                 this.errors.email.error = false;
             }
 
-            const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            const email_pattern = /(.+)@(.+){2,}\.(.+){2,}/;
             if(!this.email.match(email_pattern)){
                 this.errors.email.error = true;
                 this.errors.email.message = "Plese enter a valid email address";
@@ -304,6 +312,7 @@ export default{
             }
         },
         name(){
+            this.name = this.name.replace(/[^a-zA-Z ]/g, "");
             if(!this.name){
                 this.errors.name.error = true;
             }else{
@@ -317,7 +326,7 @@ export default{
                 this.errors.email.error = false;
             }
 
-            const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            const email_pattern = /(.+)@(.+){2,}\.(.+){2,}/; 
             if(!this.email.match(email_pattern)){
                 this.errors.email.error = true;
                 this.errors.email.message = "Plese enter a valid email address";

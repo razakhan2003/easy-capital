@@ -5,7 +5,17 @@
                 <div class="lg:w-1/2 flex flex-col justify-center items-center">
                     <div v-if="step === 0" class="w-full my-auto flex flex-col gap-6 p-10 rounded-xl border-2 border-[#E6E6E6] custom-shadow">
                         <h2 class="text-[1.2rem] font-semibold">Let’s start by filling in some basic details:</h2>
-                        <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :onlyAlphabets="true" :error="errors.name.error" :errorMessage="errors.name.message"/>
+                        <div class="flex flex-col text-base">
+                            <label class="pl-1">Name*</label>
+                            <span v-if="errors.name.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.name.message }}</span>
+                            <input placeholder="Enter your name as per PAN Card"
+                                :class="errors.name.error ? 'border-[#EE4B2B] focus:border-[#EE4B2B]' : 'border-[#fff] focus:border-primary'"
+                                class="font-light rounded-full duration-200 bg-[#EDF2F7] appearance-none border-2 w-full py-2 px-4 text-gray-700 leading-tight outline-none"
+                                v-model="name"
+                            >
+                        </div>
+
+                        <!-- <text-input v-model="name" placeholder="Enter your name as per PAN Card" label="Full Name*" :onlyAlphabets="true" :error="errors.name.error" :errorMessage="errors.name.message"/> -->
                         <text-input  :focus="focus" v-model="mobile" placeholder="Enter your mobile number" label="Mobile Number*" type="number" maxLength="10" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
                         <div>
                             <label class="pl-1 mb-2">Gender*</label>
@@ -78,7 +88,16 @@
                         <text-select v-model="gst" label="GST No.*" :options="[{name: 'Select if you have GST or not', value: ''},{name: 'Yes', value: 'Yes'}, {name: 'No', value: 'No'}]" :error="errors.gst.error" :errorMessage="errors.gst.message"/>
                         <text-select v-model="state" label="State*" :options="country_states" :error="errors.state.error" :errorMessage="errors.state.message"/>
                         <div class="flex flex-col lg:flex-row gap-6">
-                            <text-input class="lg:w-1/2" v-model="city" placeholder="Enter your city" label="City*" :error="errors.city.error" :errorMessage="errors.city.message"/>
+                            <div class="flex flex-col text-base">
+                                <label class="pl-1">City*</label>
+                                <span v-if="errors.city.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.city.message }}</span>
+                                <input placeholder="Enter your city"
+                                    :class="errors.city.error ? 'border-[#EE4B2B] focus:border-[#EE4B2B]' : 'border-[#fff] focus:border-primary'"
+                                    class="lg:w-1/2 font-light rounded-full duration-200 bg-[#EDF2F7] appearance-none border-2 w-full py-2 px-4 text-gray-700 leading-tight outline-none"
+                                    v-model="city"
+                                >
+                            </div>
+                            <!-- <text-input class="lg:w-1/2" v-model="city" placeholder="Enter your city" label="City*" :error="errors.city.error" :errorMessage="errors.city.message"/> -->
                             <text-input type="number" maxLength="6" class="lg:w-1/2" v-model="pincode" placeholder="Enter your pincode" label="Pincode*" :error="errors.pincode.error" :errorMessage="errors.pincode.message"/>
                         </div>
                         <custom-button :disabled="sending" @click="sending ? '' : submit()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Submit'" :rounded="true" />
@@ -406,6 +425,7 @@ export default{
             }
         },
         name(){
+            this.name = this.name.replace(/[^a-zA-Z ]/g, "");
             if(!this.name){
                 this.errors.name.error = true;
             }else{
@@ -492,6 +512,7 @@ export default{
             }
         },
         city(){
+            this.city = this.city.replace(/[^a-zA-Z ]/g, "");
             if(!this.city){
                 this.errors.city.error = true;
             }else{
