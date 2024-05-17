@@ -395,6 +395,7 @@ export default{
         },
         editNumber(){
             this.step = 0;
+            this.order_id = uuid4();
             this.focus = true;
         }
     },
