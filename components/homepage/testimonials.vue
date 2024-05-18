@@ -4,7 +4,8 @@
             <div class="flex flex-col items-center gap-6">
                 <h2 class="w-full font-bold text-center text-[2.5rem]">Success Stories</h2>
                 <p class="font-light lg:w-2/3 text-[1rem] text-center">
-                    Here are few stories from our satisfied clients who have successfully secured loans with us. Whether it's for personal, business, or home needs, our clients rave about our efficient loan process, competitive rates, and exceptional customer service. Explore their experiences to see how Easy Capital can help you achieve your financial goals with confidence and ease                </p>
+                    Here are few stories from our satisfied clients who have successfully secured loans with us. Our clients rave about our efficient loan process, competitive rates, and exceptional customer service. Explore their experiences to see how Easy Capital can help you achieve your financial goals with confidence and ease                
+                </p>
             </div>
             <div class="mt-8">
                 <swiper :modules="[SwiperPagination]" :pagination="{clickable: true}" class="!py-10" :breakpoints="breakpoints">

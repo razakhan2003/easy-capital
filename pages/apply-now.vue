@@ -88,12 +88,12 @@
                         <text-select v-model="gst" label="GST No.*" :options="[{name: 'Select if you have GST or not', value: ''},{name: 'Yes', value: 'Yes'}, {name: 'No', value: 'No'}]" :error="errors.gst.error" :errorMessage="errors.gst.message"/>
                         <text-select v-model="state" label="State*" :options="country_states" :error="errors.state.error" :errorMessage="errors.state.message"/>
                         <div class="flex flex-col lg:flex-row gap-6">
-                            <div class="flex flex-col text-base">
+                            <div class="lg:w-1/2 flex flex-col text-base">
                                 <label class="pl-1">City*</label>
                                 <span v-if="errors.city.error" class="pl-1 text-[0.8rem] text-[#EE4B2B]">{{ errors.city.message }}</span>
                                 <input placeholder="Enter your city"
                                     :class="errors.city.error ? 'border-[#EE4B2B] focus:border-[#EE4B2B]' : 'border-[#fff] focus:border-primary'"
-                                    class="lg:w-1/2 font-light rounded-full duration-200 bg-[#EDF2F7] appearance-none border-2 w-full py-2 px-4 text-gray-700 leading-tight outline-none"
+                                    class="font-light rounded-full duration-200 bg-[#EDF2F7] appearance-none border-2 w-full py-2 px-4 text-gray-700 leading-tight outline-none"
                                     v-model="city"
                                 >
                             </div>

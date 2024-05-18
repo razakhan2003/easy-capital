@@ -7,7 +7,7 @@
                         <h2 v-if="step < 2" class="text-[1.2rem] font-semibold mb-[2rem]">Log into your account:</h2>
 
                         <div v-if="step === 0" class="flex flex-col gap-6">
-                            <text-input v-model="mobile" maxLength="10" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
+                            <text-input :focus="focus" v-model="mobile" maxLength="10" placeholder="Enter your mobile number" label="Mobile Number*" type="number" :required="true" :error="errors.mobile.error" :errorMessage="errors.mobile.message"/>
                             <span v-if="api_error" class="text-center italic text-[#EE4B2B] text-[0.9rem]">{{ api_error }}</span>
                             <div class="flex flex-col gap-2">
                                 <custom-button @click="sendOTP" class="max-w-fit text-[1rem] px-10 ml-auto" :title="sending ? 'Sending...' : 'Next'" :rounded="true" />
@@ -15,27 +15,37 @@
                             </div>
                         </div>
                         
-                        <div v-if="step === 1" class="flex flex-col gap-10">
+                           
+                        <div v-if="step === 1" class="flex flex-col gap-6">
                             <h2 class="font-semibold text-[1.3rem] text-center">OTP Verification</h2>
                             <h2 class="font-medium text-[1rem] text-center">One Time Password (OTP) has been sent via SMS to <br>+91-{{ mobile }}</h2>
                             <h2 class="font-medium text-[1rem] text-center">Enter the OTP below to verify it.</h2>
                             <div class="flex flex-col max-w-fit gap-4 items-end mx-auto">
-                            <v-otp-input
-                                v-model:value="otp"
-                                input-classes="otp-input"
-                                separator=""
-                                inputType="numeric"
-                                :num-inputs="6"
-                                :should-auto-focus="true"
-                                :should-focus-order="true"
-                                :placeholder="['', '', '', '', '', '']"
-                            />
-                            <span v-if="!resend" class="font-medium text-[0.9rem] mr-[0.4rem]">Resend OTP in {{ timeout }}s</span>
-                            <span v-else @click="resendOTP" class="cursor-pointer font-light text-[0.9rem] italic underline text-primary mr-[0.4rem]">Resend OTP</span>
-
-                            <span v-if="api_error" class="text-center italic text-[#EE4B2B] text-[0.9rem]">{{ api_error }}</span>
-                            <custom-button :disabled="(sending || otp.length < 6)" @click="sending ? '' : verifyOTP()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Verify OTP'" :rounded="true" />
-                        </div>
+                                <span @click="editNumber" class="cursor-poiner font-medium text-[0.8rem] mr-[0.4rem] 
+                                text-primary underline mr-auto ml-[0.4rem]">Edit Number</span>
+                                <v-otp-input
+                                    v-model:value="otp"
+                                    input-classes="otp-input"
+                                    separator=""
+                                    inputType="numeric"
+                                    :num-inputs="6"
+                                    :should-auto-focus="true"
+                                    :should-focus-order="true"
+                                    :placeholder="['', '', '', '', '', '']"
+                                />
+                                <span v-if="!resend" class="font-medium text-[0.9rem] mr-[0.4rem]">Resend OTP in {{ timeout }}s</span>
+                                <span v-else @click="resendOTP" class="cursor-pointer font-light text-[0.9rem] italic underline text-primary mr-[0.4rem]">Resend OTP</span>
+                            </div>
+                            
+                            <div class="flex gap-6 items-start">
+                                <input class="mt-1" v-model="tnc" value="agreed" type="checkbox" id="tnc" name="tnc" />
+                                <p class="text-[0.9rem] font-light text-justify">
+                                    I further consent to receive the loan and product updates of Easy Capital on whatsapp and allow Easy Capital and/or their authorised third party service providers to contact me for marketing purposes via SMS, Telephone, Email or any other means.     
+                                </p>
+                            </div>
+                            
+                            <span class="text-center italic text-[#EE4B2B] text-[0.9rem]">{{ api_error }}</span>
+                            <custom-button :disabled="(sending || otp.length < 6 || !tnc.includes('agreed'))" @click="(sending || otp.length < 6 || !tnc.includes('agreed')) ? '' : verifyOTP()" class="max-w-fit text-[1rem] px-10 mx-auto" :title="sending ? 'Sending...' : 'Verify OTP'" :rounded="true" />
                         </div>
 
                         <div v-if="step === 2" class="flex flex-col gap-6">
@@ -112,7 +122,9 @@ export default{
             },
             sending: false,
             api_error: "",
-            total_errors: 0
+            total_errors: 0,
+            tnc: [],
+            foucs: false
         }
     },
     computed: {
@@ -192,6 +204,7 @@ export default{
                         this.api_error = message;
                     }else{
                         this.api_error = "";
+                        this.focus = false;
                         this.step++;
                     }
 
@@ -296,6 +309,11 @@ export default{
                     this.sending = false;
                 }   
             }
+        },
+        editNumber(){
+            this.step = 0;
+            this.order_id = uuid4();
+            this.focus = true;
         }
     },
     watch: {
