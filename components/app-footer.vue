@@ -8,14 +8,17 @@
                         Your trusted partner for hassle-free loans. With transparent processes and quick approvals, we empower your financial journey. Simplify borrowing with Easy Capital today.
                     </p>
                     <div class="flex mt-4 items-center gap-4">
-                        <nuxt-link target="_blank" to="https://facebook.com" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                        <nuxt-link target="_blank" to="https://www.facebook.com/profile.php?id=61559145197050" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
                             <icons-facebook class="max-w-[1.6rem]"/>
                         </nuxt-link>
-                        <nuxt-link target="_blank" to="https://twitter.com" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                        <nuxt-link target="_blank" to="https://x.com/CapitaEasy" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
                             <icons-twitter class="max-w-[1.6rem]"/>
                         </nuxt-link>
-                        <nuxt-link target="_blank" to="https://instagram.com" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                        <nuxt-link target="_blank" to="https://www.instagram.com/easycapital.official/" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
                             <icons-instagram class="max-w-[1.6rem]"/>
+                        </nuxt-link>
+                        <nuxt-link target="_blank" to="https://www.youtube.com/channel/UC-0Db-fBEk46ipnMIzxOAfw" class="cursor-pointer bg-[#fff] bg-opacity-20 w-[3rem] h-[3rem] rounded-full flex justify-center items-center">
+                            <icons-youtube class="max-w-[1.6rem]"/>
                         </nuxt-link>
                     </div>
                 </div>
