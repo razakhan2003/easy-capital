@@ -138,6 +138,12 @@ export default{
             if(this.errors.name.error || this.errors.email.error || this.errors.mobile.error) return false;
             return true;
         },
+        resetForm(){
+            this.name = "";
+            this.email = "";
+            this.mobile = "";
+            this.message = "";
+        },
         async sendContact(){
             if(this.validateData()){
                 this.sending = true;
@@ -150,6 +156,7 @@ export default{
                     })
 
                     this.success = "Thank you for contacting us. Our team will reach out to you soon!"
+                    this.resetForm()
                 }catch(error){
                     console.log(error);
                     this.sending = false;
