@@ -20,7 +20,7 @@
                         </div>
                         <text-area v-model="message" :rows="7" placeholder="Your Message..." />
                         <custom-button class="max-w-fit ml-auto" :title="sending ? 'Sending...' : 'Send'" @click="sending ? '' : sendContact()" :disabled="sending"/>
-                        <span v-if="success" class="-mt-2 text-[#50C878] font-medium italic text-[0.9rem] text-right">{{ success }}s</span>
+                        <span v-if="success" class="-mt-2 text-[#50C878] font-medium italic text-[0.9rem] text-right">{{ success }}</span>
                     </div>
                 </div>
                 <div class="lg:w-1/2 flex flex-col gap-6">
