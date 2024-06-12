@@ -80,7 +80,7 @@ export default{
                 {name: "Machinery Loan", route: "/products/machinery-loan"},
                 {name: "Business Loan for Women", route: "/products/business-loan-for-women"},
                 {name: "Business Ecommerce Loan", route: "/products/business-ecommerce-loan"},
-                {name: "Loan Against Propert for Business", route: "/products/loan-against-property"},
+                {name: "Loan Against Property for Business", route: "/products/loan-against-property"},
             ],
             dashboard: [
                 {name: "Dashboard", route: "/dashboard"}
