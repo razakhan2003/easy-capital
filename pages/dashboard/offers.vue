@@ -36,8 +36,8 @@
                     <h4 class="font-semibold text-[0.8rem]">{{ lender.loan_amount }}</h4>
                     </div>
                     
-                    <custom-button @click="(lender.status === 'Applied' || sending === index) ? '' : apply(index)" :disabled="(lender.status === 'Applied' || sending === index) ? true : false" 
-                        class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="sending === index ? 'Applying...' : lender.status === 'Applied' ? 'Applied' : 'Apply'" />
+                    <custom-button @click="(sending === index) ? '' : apply(index)" :disabled="(sending === index) ? true : false" 
+                        class="col-span-3 lg:col-span-1 w-full lg:max-w-fit lg:ml-auto py-2 px-8 !text-[0.8rem]" :title="sending === index ? 'Applying...' : 'Apply'" />
                     
                 </div>
             </div>

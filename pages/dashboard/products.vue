@@ -7,9 +7,9 @@
                     :icon="product.icon"
                     :key="product.title"
                     :apply="true"
-                    :disabled="(product.status || sending === index)"
-                    :btnText="sending === index ? 'Applying...' : product.status ? 'Applied' : 'Apply'"
-                    @submit="(product.status || sending === index) ? '' : apply(index)"
+                    :disabled="(sending === index)"
+                    :btnText="sending === index ? 'Applying...' : 'Apply'"
+                    @submit="(sending === index) ? '' : apply(index)"
                     />
             </div>
         </div>
