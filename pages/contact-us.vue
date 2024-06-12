@@ -66,6 +66,7 @@ export default{
             message: "",
             sending: false,
             success: "",
+            reset: false,
             errors: {
                 name: {error: false, message: "Name is required"},
                 mobile: {error: false, message: "Mobile number should be of 10 digits"},
@@ -75,6 +76,8 @@ export default{
     },
     watch: {
         name(){
+            if(this.reset) return;
+
             this.name = this.name.replace(/[^a-zA-Z ]/g, "");
             if(!this.name){
                 this.errors.name.error = true;
@@ -83,6 +86,8 @@ export default{
             }
         },
         email(){
+            if(this.reset) return;
+
             if(!this.email){
                 this.errors.email.error = true;
             }else{
@@ -99,6 +104,8 @@ export default{
             }
         },
         mobile(){
+            if(this.reset) return;
+            
             if(!this.mobile || this.mobile.length !== 10){
                 this.errors.mobile.error = true;
             }else{
@@ -139,10 +146,12 @@ export default{
             return true;
         },
         resetForm(){
+            this.reset = true;
             this.name = "";
             this.email = "";
             this.mobile = "";
             this.message = "";
+            this.reset = false;
         },
         async sendContact(){
             if(this.validateData()){
