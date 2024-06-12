@@ -66,7 +66,6 @@ export default{
             message: "",
             sending: false,
             success: "",
-            reset: false,
             errors: {
                 name: {error: false, message: "Name is required"},
                 mobile: {error: false, message: "Mobile number should be of 10 digits"},
@@ -76,18 +75,14 @@ export default{
     },
     watch: {
         name(){
-            if(this.reset) return;
-
             this.name = this.name.replace(/[^a-zA-Z ]/g, "");
             if(!this.name){
                 this.errors.name.error = true;
             }else{
                 this.errors.name.error = false;
-            }
+            }  
         },
         email(){
-            if(this.reset) return;
-
             if(!this.email){
                 this.errors.email.error = true;
             }else{
@@ -104,8 +99,6 @@ export default{
             }
         },
         mobile(){
-            if(this.reset) return;
-            
             if(!this.mobile || this.mobile.length !== 10){
                 this.errors.mobile.error = true;
             }else{
@@ -145,13 +138,16 @@ export default{
             if(this.errors.name.error || this.errors.email.error || this.errors.mobile.error) return false;
             return true;
         },
-        resetForm(){
-            this.reset = true;
+        async resetForm(){
             this.name = "";
             this.email = "";
             this.mobile = "";
             this.message = "";
-            this.reset = false;
+        },
+        async resetErrors(){
+            this.errors.name.error = false;
+            this.errors.email.error = false;
+            this.errors.mobile.error = false;
         },
         async sendContact(){
             if(this.validateData()){
@@ -165,7 +161,8 @@ export default{
                     })
 
                     this.success = "Thank you for contacting us. Our team will reach out to you soon!"
-                    this.resetForm()
+                    await this.resetForm();
+                    await this.resetErrors();
                 }catch(error){
                     console.log(error);
                     this.sending = false;
