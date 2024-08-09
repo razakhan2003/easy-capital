@@ -18,7 +18,8 @@
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "vue3-lottie": "^3.3.0",
-    "vue3-otp-input": "^0.4.4"
+    "vue3-otp-input": "^0.4.4",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
