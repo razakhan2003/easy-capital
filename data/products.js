@@ -26,6 +26,7 @@ export const products = [
     image: "/images/products/secured-loan.svg",
   },
   {
+    show: true,
     name: "Equipment and Machinery Loan Terms",
     slug: "Machinery-loans",
     tagline:
@@ -52,6 +53,7 @@ export const products = [
     image: "/images/products/mech-loan.svg",
   },
   {
+    show: true,
     name: "Loan Against Property Terms",
     slug: "loan-against-property",
     tagline: "Unlock Your Property's Potential: Secure Loans, Seamless Dreams",
@@ -77,6 +79,7 @@ export const products = [
     image: "/images/products/home-loan.svg",
   },
   {
+    show: true,
     name: "Cash Credit Loan Terms",
     slug: "secured-cash-credit",
     tagline: "Fuel Your Business: Unrestricted Funds, Unlimited Potential",
@@ -102,6 +105,7 @@ export const products = [
     image: "/images/products/credit.svg",
   },
   {
+    show: true,
     name: "Working Capital Loan Terms",
     slug: "working-capital-loans",
     tagline: "Boost Your Business Flow: Seamless Working Capital Solutions",
@@ -127,6 +131,7 @@ export const products = [
     image: "/images/products/working-loan.svg",
   },
   {
+    show: true,
     name: "Overdraft Facility Terms",
     slug: "secured-overdraft",
     tagline:
